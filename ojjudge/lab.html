@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>对拍实验室 — OJJudge 评测软件</title>
+<meta name="description" content="把 OI 的对拍技巧搬进浏览器：写主程序和暴力程序，随机数据自动跑，自动揪出不一致的那组输入。JavaScript 即写即测，无需安装。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="对拍实验室 — OJJudge 评测软件">
+<meta property="og:description" content="把 OI 的对拍技巧搬进浏览器：写主程序和暴力程序，随机数据自动跑，自动揪出不一致的那组输入。即写即测，无需安装。">
+<meta property="og:image" content="og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="index.html">
+      <span class="logo-mark">OJ</span>
+      <span class="logo-name">OJJudge<small>评测软件</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="site-nav">
+      <a href="index.html">首页</a>
+      <a href="guide.html">使用说明</a>
+      <a href="lab.html">对拍实验室</a>
+      <a href="changelog.html">更新日志</a>
+      <a class="btn btn-primary btn-sm" href="download/OJJudge评测.exe" download>下载 exe</a>
+      <button id="oj-lang-toggle" class="lang-toggle" type="button" title="Switch to English" aria-label="Switch to English">EN</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<div class="page-hero">
+  <div class="container">
+    <h1>对拍实验室</h1>
+    <p>把 OI 选手的找 bug 利器搬进浏览器：写一个主程序、一个暴力/标程，随机数据自动跑，不一致的那组输入自动现形。不用装环境——JavaScript 在浏览器里即写即测，也能切到 C++ / Python / Java 走服务端真编译器跑。</p>
+  </div>
+</div>
+
+<div class="container">
+<article class="doc">
+
+  <div class="lab-rules">
+    <div>
+      <h3>程序约定</h3>
+      <p><b>JavaScript</b>：每个代码框里写一个函数（名字用 <code>main</code> / <code>brute</code> / <code>solve</code> 均可）。函数收到一个字符串 <code>input</code>（本轮完整输入），<code>return</code> 的内容就是该程序的输出。</p>
+      <p><b>C++ / Python / Java</b>：写一个完整程序，从标准输入读数据、把结果打到标准输出。评测时会把该组输入喂给 stdin，并逐字比对 stdout。</p>
+    </div>
+    <div>
+      <h3>生成器格式</h3>
+      <p>每行一段；<code>{变量}</code> 替换为随机值；行首写 <code>{n} 行:</code> 表示该行重复 n 次。范围写法 <code>n=1 8, a=-10 10</code>，支持 <code>1e9</code> 与负数，未定义的变量默认 1~1000。</p>
+    </div>
+  </div>
+
+  <h2>预设挑战</h2>
+  <p>三个挑战各埋了一个真实 bug（初值、API 误用、浮点精度）。点「载入挑战」填好三块代码，直接点下方「开始对拍」看它怎么被抓出来。</p>
+  <div class="lab-challenges">
+    <div class="lab-challenge">
+      <b>挑战 1 · 最大子段和</b>
+      <span class="lab-ch-bug">初值之坑</span>
+      <p>Kadane 初值设 0，全负数时返回 0。暴力 O(n²) 枚举显然正确。</p>
+      <button class="btn btn-outline btn-sm" data-preset="kadane">载入挑战</button>
+    </div>
+    <div class="lab-challenge">
+      <b>挑战 2 · 数组排序</b>
+      <span class="lab-ch-bug">API 误用之坑</span>
+      <p>直接 <code>a.sort()</code> 按字典序排，10 会排在 9 前面。暴力用数值比较器。</p>
+      <button class="btn btn-outline btn-sm" data-preset="sort">载入挑战</button>
+    </div>
+    <div class="lab-challenge">
+      <b>挑战 3 · 大数取模</b>
+      <span class="lab-ch-bug">精度之坑</span>
+      <p><code>(a*b)%p</code> 在 a、b 到 1e9 时超出双精度精确范围。暴力用 BigInt。</p>
+      <button class="btn btn-outline btn-sm" data-preset="bigmod">载入挑战</button>
+    </div>
+  </div>
+
+  <h2>经典 Bug 博物馆</h2>
+  <p>三件「镇馆展品」，都是真实世界里最常见的坑。点「现场演示」载入下方工作台直接开跑，看随机数据怎么把它们揪出来。</p>
+  <div class="lab-museum">
+    <div class="lab-museum-card">
+      <div class="lab-museum-head"><span class="lab-museum-no">展品 01</span><span class="lab-ch-bug">语义之坑</span></div>
+      <b>负数取模</b>
+      <p>C++ / JS 的 <code>%</code> 余数符号跟着被除数走：<code>-7 % 3 = -1</code>，而数学上余数应是 2。写哈希、环状 DP 时一个负下标就能 WA 一整晚。</p>
+      <button class="btn btn-outline btn-sm" data-preset="mod-neg">现场演示</button>
+    </div>
+    <div class="lab-museum-card">
+      <div class="lab-museum-head"><span class="lab-museum-no">展品 02</span><span class="lab-ch-bug">溢出之坑</span></div>
+      <b>整数溢出</b>
+      <p>两个 10<sup>6</sup> 量级的数相乘就够爆 int，绕回一圈变成另一个数。「先取模再乘」是 OI 的肌肉记忆，但总有人忘。</p>
+      <button class="btn btn-outline btn-sm" data-preset="int-overflow">现场演示</button>
+    </div>
+    <div class="lab-museum-card">
+      <div class="lab-museum-head"><span class="lab-museum-no">展品 03</span><span class="lab-ch-bug">精度之坑</span></div>
+      <b>浮点累加</b>
+      <p>和一旦超过 2<sup>53</sup> ≈ 9×10<sup>15</sup>，每一步 <code>+</code> 都在悄悄丢精度。答案差 1，评测机不会替你圆。</p>
+      <button class="btn btn-outline btn-sm" data-preset="float-sum">现场演示</button>
+    </div>
+  </div>
+
+  <h2>对拍工作台</h2>
+  <div class="lab-langbar">
+    <span class="lab-langbar-label">编程语言</span>
+    <div class="lab-langbar-btns" id="lab-langs">
+      <button class="lab-lang on" type="button" data-lang="js">JavaScript</button>
+      <button class="lab-lang" type="button" data-lang="cpp">C++</button>
+      <button class="lab-lang" type="button" data-lang="python">Python</button>
+      <button class="lab-lang" type="button" data-lang="java">Java</button>
+    </div>
+    <span class="lab-langbar-note" id="lab-langnote"></span>
+  </div>
+  <p class="lab-langhint" id="lab-langhint"></p>
+  <div class="lab-editors">
+    <div class="lab-editor">
+      <label for="lab-format">数据生成器 · 输入格式</label>
+      <textarea id="lab-format" rows="4" spellcheck="false"></textarea>
+      <label for="lab-ranges">输入范围</label>
+      <textarea id="lab-ranges" rows="3" spellcheck="false"></textarea>
+    </div>
+    <div class="lab-editor">
+      <label id="lab-main-label" for="lab-main">主程序（JS 函数 main(input)）</label>
+      <textarea id="lab-main" rows="10" spellcheck="false"></textarea>
+    </div>
+    <div class="lab-editor">
+      <label id="lab-brute-label" for="lab-brute">暴力 / 标程（JS 函数）</label>
+      <textarea id="lab-brute" rows="10" spellcheck="false"></textarea>
+    </div>
+  </div>
+
+  <div class="lab-controls">
+    <label>轮数
+      <select id="lab-rounds">
+        <option value="10">10</option>
+        <option value="50">50</option>
+        <option value="100" selected>100</option>
+        <option value="500">500</option>
+      </select>
+    </label>
+    <label>单轮超时
+      <select id="lab-timeout">
+        <option value="500">0.5 秒</option>
+        <option value="1500" selected>1.5 秒</option>
+        <option value="5000">5 秒</option>
+      </select>
+    </label>
+    <button class="btn btn-primary" id="lab-start">开始对拍</button>
+    <button class="btn btn-outline btn-sm" id="lab-copylink" title="复制当前挑战的链接，别人打开会自动载入同样的代码">复制挑战链接</button>
+    <span class="lab-status" id="lab-status"></span>
+  </div>
+
+  <div class="lab-results">
+    <div id="lab-summary"></div>
+    <div class="lab-log" id="lab-log"></div>
+    <div id="lab-problems"></div>
+  </div>
+
+  <div class="lab-share" id="lab-share" hidden></div>
+
+  <blockquote>对拍不中断：哪怕某轮已经不一致，也会跑完全部轮再一次性汇总——和桌面版 OJJudge 的行为一致。程序请确保能自行结束，死循环会被判超时（TLE）而不会卡死本页。</blockquote>
+
+  <h2>真实运行示例</h2>
+  <p>下面是「挑战 2 · 数组排序」的一次真实运行（50 轮）：主程序直接 <code>a.sort()</code> 按字典序排，一旦数据里出现两位数就露出马脚——第 1 轮输入含 4 和 13，主程序输出 <code>13 2 36 4 57 63 83 89</code>，暴力输出 <code>2 4 13 36 57 63 83 89</code>。50 轮里 14 处不一致全部列出，每组的输入与两边输出都能点开核对。</p>
+  <figure class="shot">
+    <img src="media/lab-results.png" alt="对拍实验室真实运行截图：挑战 2 数组排序 50 轮对拍，一致 36 轮、发现 14 处问题，问题明细展示第 1 轮输入、主程序输出与暴力输出的差异" loading="lazy">
+    <figcaption>真实运行截图 · 挑战 2（数组排序）50 轮：一致 36 轮，发现 14 处问题——主程序的字典序排序在两位数上一眼现形</figcaption>
+  </figure>
+  <p>换语言也一样：上图的「编程语言」一栏可以直接切到 <strong>C++ / Python / Java</strong>，两个代码框里的示例会同步换成该语言的版本，<strong>随机数据的生成始终在浏览器里</strong>，只有两个程序交给服务端真编译器跑——所以在网页上对拍的结论，和你下载 exe 在本地对拍的结论完全一致。</p>
+  <figure class="shot">
+    <img src="media/lab-multilang.png" alt="对拍实验室多语言工作台截图：编程语言一栏提供 JavaScript、C++、Python、Java 四个按钮，右侧提示服务端可用的语言，下方是主程序与暴力程序两个代码框" loading="lazy">
+    <figcaption>多语言工作台 · JavaScript / C++ / Python / Java 一键切换，服务端工具链实时探测，缺哪个语言会灰掉并说明原因</figcaption>
+  </figure>
+  <p>把这段输出对照着看，就是「对拍」的全部要义：<strong>你不必知道错在哪，只要有一个一定正确的对照程序，数据会替你说出来。</strong>桌面版 OJJudge 的对拍流程与此完全一致，还支持 C++ 与问题数据留存。</p>
+
+</article>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="logo-mark">OJ</span> OJJudge 评测软件</div>
+        <p>本地 OI 评测工具：单题 / 多题一键出分，对拍找 bug，随机数据生成。所有评测在本机完成，数据不出电脑。</p>
+      </div>
+      <div>
+        <h4>站点导航</h4>
+        <a href="index.html">首页</a>
+        <a href="guide.html">使用说明</a>
+        <a href="lab.html">对拍实验室</a>
+        <a href="changelog.html">更新日志</a>
+      </div>
+      <div>
+        <h4>相关</h4>
+        <a href="guide.html#import">题目导入.json</a>
+        <a href="guide.html#faq">常见问题</a>
+        <a href="download/OJJudge评测.exe" download>下载最新版</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> CPP Studio zhangjh · OJJudge 评测软件 · 数据不出本机</span>
+      <span>需本机 g++ 支持 · 默认 C:\mingw64\bin\g++.exe</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/i18n-dict.js"></script>
+<script src="js/i18n-dict-extra.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script src="js/lab.js"></script>
+<script src="js/sharecard.js"></script>
+<script>
+  /* 首页 iframe 嵌入时只展示对拍工作台（裁掉站头/页头/页脚） */
+  if (window.self !== window.top || location.hash.indexOf("embed") >= 0) {
+    document.body.classList.add("lab-embed");
+  }
+</script>
+</body>
+</html>

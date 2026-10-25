@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OJJudge 评测软件 — 本地 OI 评测，一键出分</title>
+<meta name="description" content="OJJudge 是一款 Windows 本地 OI 评测工具：单题/多题一键评测出分、对拍找 bug、随机数据生成，单文件免安装。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="OJJudge — 本地 OI 评测，一键出分">
+<meta property="og:description" content="单题/多题一键出分、对拍找 bug、随机数据生成。Windows 单文件免安装，macOS/Linux 有源码版。所有评测在本机完成，数据不出电脑。">
+<meta property="og:image" content="og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="index.html">
+      <span class="logo-mark">OJ</span>
+      <span class="logo-name">OJJudge<small>评测软件</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="site-nav">
+      <a href="index.html">首页</a>
+      <a href="guide.html">使用说明</a>
+      <a href="lab.html">对拍实验室</a>
+      <a href="changelog.html">更新日志</a>
+      <a class="btn btn-primary btn-sm" href="download/OJJudge评测.exe" download>下载 exe</a>
+      <button id="oj-lang-toggle" class="lang-toggle" type="button" title="Switch to English" aria-label="Switch to English">EN</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="container">
+    <div>
+      <span class="hero-kicker">本地 OI 评测工具</span>
+      <h1>OJJudge 评测软件<br>一个目录，一键出分</h1>
+      <p class="hero-sub">把「编译 → 跑数据 → 比对输出 → 出分」整个流程自动化：单题评测、多题批量、对拍找 bug、随机数据生成，一个 exe 全包。数据不出本机。</p>
+      <div class="hero-cta">
+        <a class="btn btn-hero" href="download/OJJudge评测.exe" download>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+          下载 for Windows
+        </a>
+        <a class="btn btn-hero" href="guide.html" style="background:rgba(255,255,255,.14);color:#fff;">使用说明</a>
+        <a class="btn btn-hero" href="lab.html" style="background:rgba(255,255,255,.14);color:#fff;">对拍实验室</a>
+      </div>
+      <p class="hero-meta">
+        v1.8 · 2026-10-24 · Windows 单文件免安装 ·
+        需本机 g++（默认 <code>C:\mingw64\bin\g++.exe</code>，可改）<br>
+        macOS / Linux 用户：<a href="download/OJJudge源码-macOS-Linux.zip" style="color:#fff;text-decoration:underline;">下载源码版</a>（需 Python 3 + clang++/g++）<br>
+        SHA256 <code>7934ab28…57d</code>
+        <span class="copy-hint" data-copy="7934ab280b0b2011fb224df049e2b7be278f99b90674a7600641ab662e38757d">复制完整校验值</span>
+      </p>
+    </div>
+    <div>
+      <div class="app-mock" role="img" aria-label="OJJudge 界面示意图：单题评测结果表格，5 组全部 AC，总分 100/100">
+        <div class="app-mock-bar"><span class="dot"></span><b>OJJudge 评测软件</b><span>单题 · 多题 · 对拍 · 造数据 · 随机数据</span></div>
+        <div class="app-mock-tabs">
+          <i class="on">单题</i><i>多题</i><i>对拍</i><i>造数据</i><i>随机数据</i><i>记录</i>
+        </div>
+        <div class="app-mock-body">
+          <div class="mock-row"><label>源码(.cpp)</label><span class="mock-input">calendar.cpp</span><span class="mock-btn" style="background:#eef0fd;color:#5b5bd6;">浏览</span></div>
+          <div class="mock-row"><label>数据目录</label><span class="mock-input">…\大样例\calendar</span><span class="mock-btn" style="background:#eef0fd;color:#5b5bd6;">浏览</span></div>
+          <div class="mock-row"><label></label><span class="mock-btn">开始评测</span></div>
+          <div class="mock-table">
+            <div class="tr hd"><span class="c">组</span><span class="c">状态</span><span class="c">得分</span><span class="c">用时(ms)</span></div>
+            <div class="tr"><span class="c">calendar1</span><span class="c"><span class="mock-badge ac">AC</span></span><span class="c">20</span><span class="c">580</span></div>
+            <div class="tr"><span class="c">calendar2</span><span class="c"><span class="mock-badge ac">AC</span></span><span class="c">20</span><span class="c">511</span></div>
+            <div class="tr"><span class="c">calendar3</span><span class="c"><span class="mock-badge ac">AC</span></span><span class="c">20</span><span class="c">476</span></div>
+            <div class="tr"><span class="c">calendar4</span><span class="c"><span class="mock-badge ac">AC</span></span><span class="c">20</span><span class="c">465</span></div>
+            <div class="tr"><span class="c">calendar5</span><span class="c"><span class="mock-badge ac">AC</span></span><span class="c">20</span><span class="c">464</span></div>
+          </div>
+          <div class="mock-score">总分：100 / 100（5/5 AC）</div>
+        </div>
+      </div>
+      <p class="app-mock-cap">界面示意 · 实际运行截图</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>九大功能，覆盖本地评测全流程</h2>
+      <p>从写完代码到确认正确，中间的所有步骤都在一个窗口里完成。</p>
+    </div>
+    <div class="features">
+      <div class="feature-card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M9 13l2 2 4-4"/></svg></div>
+        <h3>单题评测</h3>
+        <p>一个源码 + 一个数据目录，一键列出每组 AC / WA / TLE / 无输出、得分、用时、期望与实际输出。</p>
+      </div>
+      <div class="feature-card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5-8 4.5-8-4.5L12 3z"/><path d="M4 12l8 4.5 8-4.5"/><path d="M4 16.5L12 21l8-4.5"/></svg></div>
+        <h3>多题评测</h3>
+        <p>一次添加多道题批量跑，结果按题分组汇总；单题出错不中断后续，最后统一出总分。</p>
+      </div>
+      <div class="feature-card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h13l-3-3M20 17H7l3 3"/></svg></div>
+        <h3>对拍找 bug</h3>
+        <p>主程序 vs 暴力/标程，随机数据逐轮比对；遇到分歧不中断，跑完全部轮一次性列出所有问题组。</p>
+      </div>
+      <div class="feature-card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9z"/><path d="M13 3v6h6"/><path d="M12 12v6M9 15h6"/></svg></div>
+        <h3>造数据</h3>
+        <p>用自己写的生成器批量产出 <code>.in</code> 与 <code>.out</code>，想控数据内容时用它。</p>
+      </div>
+      <div class="feature-card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.4" fill="currentColor" stroke="none"/><circle cx="15" cy="9" r="1.4" fill="currentColor" stroke="none"/><circle cx="9" cy="15" r="1.4" fill="currentColor" stroke="none"/><circle cx="15" cy="15" r="1.4" fill="currentColor" stroke="none"/></svg></div>
+        <h3>随机数据</h3>
+        <p>不会写生成器？填输入格式、范围、数量即可；附 AC 代码则顺带跑出 <code>.out</code>，留空只出 <code>.in</code>。</p>
+      </div>
+      <div class="feature-card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+        <h3>评测记录</h3>
+        <p>单题 / 多题 / 对拍 / 造数据每次运行自动保存，软件内可回看历史，内置改动日志。</p>
+      </div>
+      <div class="feature-card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6L3 12l5 6M16 6l5 6-5 6M13 4l-2 16"/></svg></div>
+        <h3>多编程语言</h3>
+        <p>C++ / Python / Java 一键切换：g++ 编译、解释器直跑、javac + java 编译运行，选「浏览」时按扩展名自动识别。单题、多题、对拍、造数据全流程通用。</p>
+      </div>
+      <div class="feature-card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M6 9h5M6 13h8"/><path d="M8 21h8M12 18v3"/></svg></div>
+        <h3>网页版也支持多语言</h3>
+        <p>官网「对拍实验室」新增语言按钮：JavaScript 在浏览器内跑，C++ / Python / Java 走服务端真编译器，随机数据生成始终在本地浏览器，与桌面版行为一致。</p>
+      </div>
+      <div class="feature-card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></div>
+        <h3>中文 / English</h3>
+        <p>底栏一键切换界面语言：标签页、按钮、表头、分区标题、状态提示整体切换，切回中文完全还原。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="container">
+    <div class="section-head">
+      <h2>两种写法，都支持</h2>
+      <p>不管你的题解是文件读写还是标准输入输出，直接丢进来就能测。</p>
+    </div>
+    <div class="io-grid">
+      <div class="io-card">
+        <h3>freopen 文件读写 <span class="tag">传统 OJ 写法</span></h3>
+        <p>程序用 <code>freopen</code> 读写固定文件名，评测时把每组数据复制为 <code>&lt;题名&gt;.in</code>，跑完拿写出的 <code>&lt;题名&gt;.out</code> 与期望比对。</p>
+<pre>freopen("calendar.in", "r", stdin);
+freopen("calendar.out", "w", stdout);</pre>
+      </div>
+      <div class="io-card">
+        <h3>cin / cout 标准输入输出 <span class="tag">洛谷 / tarjano 写法</span></h3>
+        <p>程序从 stdin 读、往 stdout 写。评测时自动把该组 <code>.in</code> 喂给程序，再捕获标准输出与期望比对。</p>
+<pre>cin &gt;&gt; n;
+cout &lt;&lt; ans &lt;&lt; "\n";</pre>
+      </div>
+    </div>
+    <p class="io-note">两种写法同时存在时，优先采用程序写出的 <code>&lt;题名&gt;.out</code>；数据目录放 <code>*.in</code> 与同名 <code>.out</code>（优先）/ <code>.ans</code> 期望输出。</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>三步开始评测</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <h3>下载并运行</h3>
+        <p>下载 <code>OJJudge评测.exe</code>，双击即用，无需安装、无需 Python 环境。</p>
+      </div>
+      <div class="step">
+        <h3>准备数据目录</h3>
+        <p>建一个文件夹，放入 <code>*.in</code> 输入和同名 <code>.out</code> / <code>.ans</code> 期望输出。</p>
+      </div>
+      <div class="step">
+        <h3>开始评测</h3>
+        <p>选源码、选数据目录，点「开始评测」，逐组结果与总分立刻呈现。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="shots">
+  <div class="container">
+    <div class="section-head">
+      <h2>软件实机截图</h2>
+      <p>以下截图取自真实运行环境（Windows 11 + Edge），未做任何修饰。</p>
+    </div>
+    <figure class="shot shot-main">
+      <img src="media/app-single.png" alt="OJJudge 软件主界面：顶部为单题、多题、对拍、造数据、随机数据、记录六个标签页，中部为源码与数据目录选择，下部为评测结果表格" loading="lazy">
+      <figcaption>主界面 · 单题评测：顶部六大功能标签，中部选择源码与数据目录，下部逐组列出状态、得分、用时、期望与实际</figcaption>
+    </figure>
+    <div class="shot-grid">
+      <figure class="shot">
+        <img src="media/site-download-warning.png" alt="Edge 下载面板提示通常不会下载 OJJudge评测.exe，请在打开前确保信任" loading="lazy">
+        <figcaption>① 下载后面板提示「通常不会下载」——未签名 exe 的正常拦截</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="media/site-download-menu.png" alt="下载条目更多菜单，选择保留" loading="lazy">
+        <figcaption>② 点条目右侧「···」→「保留」，文件留在下载目录</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="media/smartscreen-1-block.png" alt="Windows Defender SmartScreen 弹窗：Windows 已保护你的电脑，阻止了无法识别的应用启动，右下角为不运行按钮" loading="lazy">
+        <figcaption>③ 双击运行弹出 SmartScreen「Windows 已保护你的电脑」——未签名软件的正常提示</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="media/smartscreen-2-stillrun.png" alt="SmartScreen 详情页：应用 OJJudge评测.exe 发布者未知，点更多信息后出现仍要运行按钮" loading="lazy">
+        <figcaption>④ 点「更多信息」展开详情（应用：OJJudge评测.exe）→ 选「仍要运行」即可打开</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>常见问题</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>结果显示「无输出」怎么办？</summary>
+        <div class="answer">确认程序确实有产出：freopen 写法请检查输出文件名是 <code>&lt;题名&gt;.out</code>（与源码同名）；cin/cout 写法会被自动捕获。两者都没输出时才会判「无输出」。</div>
+      </details>
+      <details>
+        <summary>结果显示「CE」？</summary>
+        <div class="answer">编译失败，结果里会带上 g++ 的原始报错信息，按提示改源码即可。默认标准为 C++14，可在界面调整。</div>
+      </details>
+      <details>
+        <summary>提示找不到编译器？</summary>
+        <div class="answer">在界面「编译器」一栏填你本机 g++ 的完整路径，例如 <code>C:\mingw64\bin\g++.exe</code>，保存后长期生效。若本机还没有 g++，先下载 <a href="https://www.winlibs.com/" target="_blank" rel="noopener">MinGW-w64 环境</a> 并解压到 <code>C:\mingw64</code>。</div>
+      </details>
+      <details>
+        <summary>评测会弄脏我的数据目录吗？</summary>
+        <div class="answer">不会。评测临时文件（<code>&lt;题名&gt;.in</code> / <code>&lt;题名&gt;.out</code>）只产生在数据目录内，每次评测结束自动清理，不影响原始数据。</div>
+      </details>
+      <details>
+        <summary>macOS / Linux 能用吗？</summary>
+        <div class="answer">可以，用源码版：下载源码包后，需要本机 Python 3 和 C++ 编译器，运行 <code>python3 ojjudge.py</code>，并在界面把编译器路径改成 <code>clang++</code>（macOS）或 <code>g++</code>（Linux）。注意 Python 必须自带 tkinter（python.org 官方版有；报 <code>No module named 'tkinter'</code> 就换官方版，或用 exe）。完整步骤见<a href="guide.html#source">使用说明 · macOS/Linux 源码版</a>。</div>
+      </details>
+      <details>
+        <summary>对拍时三个程序都要用标准输入输出吗？</summary>
+        <div class="answer">是。生成器写 stdout，主程序与暴力/标程读 stdin 写 stdout。如果原程序用了 freopen 固定文件名，请先改成标准输入输出再对拍。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>对拍实验室 · 实时预览</h2>
+      <p>不用下载也能玩：浏览器里直接对拍，和桌面版「载入挑战」同源。选一个挑战，点「开始对拍」看埋好的 bug 现形。</p>
+    </div>
+    <div class="lab-preview">
+      <iframe src="lab.html#challenge=sort&embed" title="OJJudge 对拍实验室实时预览" loading="lazy"></iframe>
+    </div>
+    <p class="lab-preview-cap">上方为实时运行的网页版对拍实验室 · <a href="lab.html">打开完整页面</a></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="download-band">
+      <h2>现在下载，下次写题直接一键出分</h2>
+      <p>三个平台按需选择：Windows 开箱即用，macOS / Linux 用源码版。</p>
+      <div class="dl-grid">
+        <div class="dl-card">
+          <span class="dl-os">WINDOWS</span>
+          <b>OJJudge评测.exe</b>
+          <p>v1.8 · 12.29 MB · 单文件免安装</p>
+          <a class="btn btn-primary btn-sm" href="download/OJJudge评测.exe" download>下载 exe</a>
+        </div>
+        <div class="dl-card">
+          <span class="dl-os">MACOS</span>
+          <b>源码版</b>
+          <p>33.2 KB · 需 Python 3 + clang++</p>
+          <a class="btn btn-outline btn-sm" href="download/OJJudge源码-macOS-Linux.zip" download>下载源码包</a>
+        </div>
+        <div class="dl-card">
+          <span class="dl-os">LINUX</span>
+          <b>源码版</b>
+          <p>33.2 KB · 需 Python 3 + g++</p>
+          <a class="btn btn-outline btn-sm" href="download/OJJudge源码-macOS-Linux.zip" download>下载源码包</a>
+        </div>
+      </div>
+      <p class="dl-note">
+        Windows 没装 g++？下载 <a href="https://www.winlibs.com/" target="_blank" rel="noopener">MinGW-w64 环境</a>（解压到 <code>C:\mingw64</code> 即对应默认路径）<br>
+        macOS 与 Linux 为同一源码包（Python 3 + tkinter，无第三方依赖），配置步骤见<a href="guide.html#source">使用说明</a><br>
+        校验值 · exe <code>7934ab28…57d</code>（<span class="copy-hint" data-copy="7934ab280b0b2011fb224df049e2b7be278f99b90674a7600641ab662e38757d">复制</span>）
+        ｜ zip <code>e02cf0db…9bef</code>（<span class="copy-hint" data-copy="e02cf0db3fa9713a7ecc09ee74c5c0811aa93ff2a5d33e9a11f92ca1d0a90bef">复制</span>）
+      </p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="logo-mark">OJ</span> OJJudge 评测软件</div>
+        <p>本地 OI 评测工具：单题 / 多题一键出分，对拍找 bug，随机数据生成。所有评测在本机完成，数据不出电脑。</p>
+      </div>
+      <div>
+        <h4>站点导航</h4>
+        <a href="index.html">首页</a>
+        <a href="guide.html">使用说明</a>
+        <a href="lab.html">对拍实验室</a>
+        <a href="changelog.html">更新日志</a>
+      </div>
+      <div>
+        <h4>相关</h4>
+        <a href="guide.html#import">题目导入.json</a>
+        <a href="guide.html#faq">常见问题</a>
+        <a href="download/OJJudge评测.exe" download>下载最新版</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> CPP Studio zhangjh · OJJudge 评测软件 · 数据不出本机</span>
+      <span>需本机 g++ 支持 · 默认 C:\mingw64\bin\g++.exe</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/i18n-dict.js"></script>
+<script src="js/i18n-dict-extra.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

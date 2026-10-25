@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>更新日志 — OJJudge 评测软件</title>
+<meta name="description" content="OJJudge 评测软件版本更新记录：从 v1.0 基础版到 v1.8 的完整改动历史。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="更新日志 — OJJudge 评测软件">
+<meta property="og:description" content="从 v1.0 基础版到 v1.8 多语言与双语界面的完整改动历史。">
+<meta property="og:image" content="og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="index.html">
+      <span class="logo-mark">OJ</span>
+      <span class="logo-name">OJJudge<small>评测软件</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="site-nav">
+      <a href="index.html">首页</a>
+      <a href="guide.html">使用说明</a>
+      <a href="lab.html">对拍实验室</a>
+      <a href="changelog.html">更新日志</a>
+      <a class="btn btn-primary btn-sm" href="download/OJJudge评测.exe" download>下载 exe</a>
+      <button id="oj-lang-toggle" class="lang-toggle" type="button" title="Switch to English" aria-label="Switch to English">EN</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<div class="page-hero">
+  <div class="container">
+    <h1>更新日志</h1>
+    <p>与软件内「记录 → 改动日志」保持同步。当前最新版本 v1.8（2026-10-24）。</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="timeline">
+
+    <div class="release">
+      <div class="v">
+        <b>v1.8</b>
+        <span>2026-10-24</span>
+        <span class="cur">当前版本</span>
+      </div>
+      <div>
+        <p class="rel-title">多语言 · 双语界面</p>
+        <ul>
+          <li><strong>评测支持多种编程语言</strong>：C++ / Python / Java 三选一。单题、多题、对拍、造数据、随机数据全流程按所选语言走对应运行时——C++ 用 g++ 编译，Python 用解释器直跑，Java 用 javac 编译、java 运行（类名取源文件名）。</li>
+          <li><strong>按扩展名自动识别</strong>：点「浏览」选中 <code>.py</code> / <code>.java</code> 源码时自动切换语言，三个页面（单题 / 多题 / 对拍）的语言下拉始终同步。</li>
+          <li><strong>运行环境自动探测</strong>：Python 解释器与 JDK（javac + java）自动在 PATH 上探测；缺环境时给出明确引导（装哪个、勾哪个选项），不再抛英文异常。</li>
+          <li><strong>界面语言切换</strong>：底栏新增「界面: 中文 / English」，一键把标签页、按钮、表头、分区标题、底栏与状态提示整体切成英文，切回中文完全还原（动态状态栏也不会被覆盖回初始值）。</li>
+          <li><strong>网页版对拍实验室同步支持多语言</strong>：工作台上方新增语言按钮（JavaScript / C++ / Python / Java）。JavaScript 在浏览器内跑，C++ / Python / Java 交给服务端真编译器跑；切换语言时示例代码与代码约定提示同步更新。页面加载自动探测服务端工具链，缺失的语言灰显并给出提示。</li>
+          <li>兼容性：Python / Java 模式下不再强制要求填写编译器路径；非 C++ 语言的造数据与随机数据也支持用对应语言的 AC 程序跑出标准答案。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="v">
+        <b>v1.7</b>
+        <span>2026-10-24</span>
+      </div>
+      <div>
+        <p class="rel-title">更好上手 · 更好看</p>
+        <ul>
+          <li><strong>单题「载入示例」</strong>：内置 3 道示例题（A+B / 最大子段和 / 数组排序），一键落盘源码与样例，零配置先跑通，验证环境是否 OK。</li>
+          <li><strong>对拍「载入挑战」</strong>：内置 4 个埋了真 bug 的对拍挑战（初值之坑 / 溢出之坑 / 负数取模 / 整数溢出），生成器 + 主程序 + 暴力一键备齐，落地即对拍揪虫，与官网「对拍实验室」同源。</li>
+          <li><strong>编译器自动探测</strong>：启动扫描 PATH，找到 g++/clang++ 自动填好；找不到时给出 WinLibs 下载引导，底部栏新增「下载编译器」一键打开，新手不再卡在「找不到编译器」。</li>
+          <li><strong>对拍战绩卡</strong>：对拍完成自动生成样式化 HTML 战绩报告（同官网视觉）+ 纯文本备份，浏览器一键查看，方便截图分享到朋友圈 / 小红书参赛。</li>
+          <li><strong>界面打磨</strong>：标题栏加版本号，状态色更直观（AC 绿 / 问题红 / 警告琥珀），暗色对拍日志更聚焦。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="v">
+        <b>v1.6</b>
+        <span>2026-10-24</span>
+      </div>
+      <div>
+        <p class="rel-title">体验与健壮性</p>
+        <ul>
+          <li><strong>输出比对归一化</strong>：行尾空白与末尾空行不再判错（OI 常规做法），单题评测与对拍同时生效，消除「答案明明对却 WA」的误报。</li>
+          <li><strong>设置持久化</strong>：编译器路径 / C++ 标准 / 优化开关 / 每题分值 / 超时 / 对拍轮数记到 exe 同目录 <code>ojjudge_settings.json</code>，重启不丢；文件损坏时静默回退默认值，不影响启动。</li>
+          <li><strong>超时可调</strong>：底部栏新增「超时(ms)」调节（1–60 秒），单题 / 多题 / 对拍共用，适配慢机器与深度搜索题。</li>
+          <li><strong>对拍崩溃检测</strong>：主程序或暴力程序非零退出（段错误 / 断言失败等）记为「运行异常」并展示退出码，不再误报成「输出不一致」。</li>
+          <li><strong>问题数据留存</strong>：对拍发现输出不一致或运行异常的轮次，输入自动存到工作目录「问题数据」，拿到数据即可离线复现调试。</li>
+          <li>本次改动全部经过回归测试：输出归一化 6 组边界用例、设置读写往返与损坏降级、真 g++ 编译 / 正误 / 超时判定、对拍崩溃检出与数据留存，18 项全过。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="v">
+        <b>v1.5</b>
+        <span>2026-10-05</span>
+      </div>
+      <div>
+        <p class="rel-title">兼容增强</p>
+        <ul>
+          <li>单题 / 多题评测新增 <strong>cin/cout 标准输入输出</strong>支持：自动把该组 <code>.in</code> 经 stdin 喂给程序并捕获 stdout，与 freopen 写法并存（同时存在时优先取 <code>&lt;题名&gt;.out</code>），兼容洛谷 / tarjano 等 OJ 常规写法。</li>
+          <li>「随机数据」的 AC 代码改为<strong>可选</strong>：提供则编译跑出 <code>.out</code>，留空则只生成 <code>.in</code>。</li>
+          <li>README 与说明书同步更新两种写法的约定。</li>
+          <li>官网新增 <strong>macOS / Linux 源码版</strong>下载（Python 3 + tkinter，无第三方依赖）；修复编译器诊断输出编码在非 Windows 平台不可用的问题（<code>mbcs</code> → 按平台取编码）。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="v">
+        <b>v1.4</b>
+        <span>记录</span>
+      </div>
+      <div>
+        <p class="rel-title">记录页</p>
+        <ul>
+          <li>新增「记录」页：评测记录（单题 / 多题 / 对拍每次运行自动保存，可回看历史）+ 改动日志。</li>
+          <li>评测记录持久化到 exe 同目录的「评测记录.json」。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="v">
+        <b>v1.3</b>
+        <span>导入与稳定</span>
+      </div>
+      <div>
+        <p class="rel-title">自动导入与稳定性</p>
+        <ul>
+          <li>多题支持启动自动导入：exe 同目录的「题目导入.json」自动填进多题列表，也可手动「导入题目」。</li>
+          <li>修复多题评测「只测一个就跳过」：改为线程安全队列模式，工作线程不碰界面控件，单题异常不中断后续。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="v">
+        <b>v1.2</b>
+        <span>对拍不中断</span>
+      </div>
+      <div>
+        <p class="rel-title">对拍体验</p>
+        <ul>
+          <li>对拍遇到错误不再中途停止：跑完全部轮，统计并一次性列出所有不一致 / 异常。</li>
+          <li>结果表状态徽章：AC 浅绿 / WA 浅红 / 其他浅黄，一眼看清。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="v">
+        <b>v1.1</b>
+        <span>增强</span>
+      </div>
+      <div>
+        <p class="rel-title">随机数据与界面</p>
+        <ul>
+          <li>新增「随机数据」：填输入格式 / 范围 / 数量 + AC 代码，自动生成可测数据（无需 freopen 手写生成器）。</li>
+          <li>界面美化：靛紫渐变标题栏、胶囊标签页、分区色条、卡片、斑马纹表格。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="v">
+        <b>v1.0</b>
+        <span>2026-10-04</span>
+      </div>
+      <div>
+        <p class="rel-title">基础版</p>
+        <ul>
+          <li>单题评测：一个源码 + 一个数据目录，一键出分（AC/WA/TLE、得分、用时、期望/实际）。</li>
+          <li>多题评测：添加多道题，一键全部评测，结果按题分组汇总。</li>
+          <li>对拍：主程序 vs 暴力/标程，用随机数据揪 bug。</li>
+          <li>造数据：自动生成随机 <code>.in</code> 与 <code>.out</code>。</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="logo-mark">OJ</span> OJJudge 评测软件</div>
+        <p>本地 OI 评测工具：单题 / 多题一键出分，对拍找 bug，随机数据生成。所有评测在本机完成，数据不出电脑。</p>
+      </div>
+      <div>
+        <h4>站点导航</h4>
+        <a href="index.html">首页</a>
+        <a href="guide.html">使用说明</a>
+        <a href="lab.html">对拍实验室</a>
+        <a href="changelog.html">更新日志</a>
+      </div>
+      <div>
+        <h4>相关</h4>
+        <a href="guide.html#import">题目导入.json</a>
+        <a href="guide.html#faq">常见问题</a>
+        <a href="download/OJJudge评测.exe" download>下载最新版</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> CPP Studio zhangjh · OJJudge 评测软件 · 数据不出本机</span>
+      <span>需本机 g++ 支持 · 默认 C:\mingw64\bin\g++.exe</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/i18n-dict.js"></script>
+<script src="js/i18n-dict-extra.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

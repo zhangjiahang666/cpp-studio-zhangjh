@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>使用说明 — OJJudge 评测软件</title>
+<meta name="description" content="OJJudge 评测软件完整使用说明：运行要求、六大功能、数据约定、题目导入配置与常见问题。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="使用说明 — OJJudge 评测软件">
+<meta property="og:description" content="运行要求、六大功能详解、数据约定、题目导入与常见问题，都在这一页。">
+<meta property="og:image" content="og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="index.html">
+      <span class="logo-mark">OJ</span>
+      <span class="logo-name">OJJudge<small>评测软件</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="site-nav">
+      <a href="index.html">首页</a>
+      <a href="guide.html">使用说明</a>
+      <a href="lab.html">对拍实验室</a>
+      <a href="changelog.html">更新日志</a>
+      <a class="btn btn-primary btn-sm" href="download/OJJudge评测.exe" download>下载 exe</a>
+      <button id="oj-lang-toggle" class="lang-toggle" type="button" title="Switch to English" aria-label="Switch to English">EN</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<div class="page-hero">
+  <div class="container">
+    <h1>使用说明</h1>
+    <p>运行要求、六大功能详解、数据约定、题目导入与常见问题，都在这一页。</p>
+  </div>
+</div>
+
+<div class="container">
+<article class="doc">
+
+  <div class="toc">
+    <b>目录</b>
+    <ol>
+      <li><a href="#req">运行要求</a></li>
+      <li><a href="#tabs">六大标签页</a></li>
+      <li><a href="#lang">编程语言与界面语言</a></li>
+      <li><a href="#data">评测约定与数据放置</a></li>
+      <li><a href="#import">题目导入配置</a></li>
+      <li><a href="#source">macOS / Linux 源码版</a></li>
+      <li><a href="#faq">常见问题</a></li>
+      <li><a href="#files">文件说明</a></li>
+    </ol>
+  </div>
+
+  <h2 id="req">一、运行要求</h2>
+  <ul>
+    <li><strong>系统</strong>：Windows，双击 <code>OJJudge评测.exe</code> 直接运行，无需安装、无需 Python 环境。</li>
+    <li><strong>编译器</strong>：需要本机装有 g++，默认路径 <code>C:\mingw64\bin\g++.exe</code>，可在各评测页的「编译器 / 标准 / 优化」里修改。</li>
+    <li><strong>默认标准</strong>：C++14，超时默认 10 秒/组，均可在界面调整。</li>
+  </ul>
+  <blockquote>想先看看软件长什么样？<a href="index.html#shots">首页有软件实机截图</a>，主界面和下载流程都有。</blockquote>
+  <p>使用 macOS / Linux？没有打包好的可执行文件，请下载<a href="download/OJJudge源码-macOS-Linux.zip">源码版压缩包</a>，按下方<a href="#source">第六节</a>的步骤运行。</p>
+
+  <h2 id="tabs">二、六大标签页</h2>
+  <table>
+    <tr><th style="width:110px">标签页</th><th>作用</th></tr>
+    <tr><td><b>单题</b></td><td>一个源码 + 一个数据目录，一键出分。结果表格逐组显示状态、得分、用时、期望与实际输出。</td></tr>
+    <tr><td><b>多题</b></td><td>通过「添加」逐题填入题目名、源码、数据目录，一键全部评测；单题异常不中断后续，最后统一汇总总分。</td></tr>
+    <tr><td><b>对拍</b></td><td>主程序 vs 暴力/标程，用随机数据找 bug。遇到分歧不中断，跑完全部轮后一次性汇总。</td></tr>
+    <tr><td><b>造数据</b></td><td>填写自己写好的生成器源码与数量，批量生成 <code>.in</code>（和可选 <code>.out</code>）。</td></tr>
+    <tr><td><b>随机数据</b></td><td>无需手写生成器：填输入格式、范围、数量即可生成随机 <code>.in</code>；附 AC 代码则顺带跑出 <code>.out</code>，留空只出 <code>.in</code>。</td></tr>
+    <tr><td><b>记录</b></td><td>查看历史评测记录（单题 / 多题 / 对拍 / 造数据 / 随机数据每次运行自动保存）与内置改动日志。</td></tr>
+  </table>
+
+  <h3>状态说明</h3>
+  <table>
+    <tr><th style="width:90px">状态</th><th>含义</th></tr>
+    <tr><td><b>AC</b></td><td>输出与期望一致，得满分</td></tr>
+    <tr><td><b>WA</b></td><td>输出与期望不一致，0 分</td></tr>
+    <tr><td><b>TLE</b></td><td>超时（默认 10 秒/组，可调）</td></tr>
+    <tr><td><b>无输出</b></td><td>程序没产出任何输出</td></tr>
+    <tr><td><b>CE</b></td><td>编译失败（结果内含 g++ 报错）</td></tr>
+    <tr><td><b>缺答案</b></td><td>该组没有 <code>.out</code> / <code>.ans</code> 期望文件</td></tr>
+  </table>
+
+  <h3>对拍的正确姿势</h3>
+  <p>对拍需要三个程序：<strong>主程序</strong>（你想验证的题解）、<strong>暴力/标程</strong>（一定正确的对照程序，慢没关系）、<strong>数据生成器</strong>（每轮随机造一组输入）。三者都用标准输入输出：生成器写 stdout，主程序与暴力读 stdin 写 stdout。若原程序用了 <code>freopen</code> 固定文件名，请先改成标准输入输出。</p>
+
+  <h2 id="lang">三、编程语言与界面语言</h2>
+  <h3>评测用哪种语言</h3>
+  <p>单题 / 多题 / 对拍三个页面都有「<strong>语言</strong>」下拉，可选 <strong>C++ / Python / Java</strong>。选「浏览」选中源码时，软件会按扩展名自动切换（<code>.py</code> → Python、<code>.java</code> → Java、<code>.cpp</code> → C++），三个页面的下拉始终保持一致。</p>
+  <table>
+    <tr><th style="width:110px">语言</th><th>运行方式</th><th>需要装什么</th></tr>
+    <tr><td><b>C++</b></td><td>用 g++ 编译成 exe 再运行</td><td>MinGW-w64（WinLibs）解压到 <code>C:\mingw64</code>，或自备 g++ 并在底栏指定路径</td></tr>
+    <tr><td><b>Python</b></td><td>解释器直跑源码，无需编译</td><td>Python 3（安装时勾选 Add to PATH）</td></tr>
+    <tr><td><b>Java</b></td><td>javac 编译成 .class，再用 java 运行（类名取源文件名）</td><td>JDK 17（需同时提供 <code>javac</code> 与 <code>java</code>，勾选 Add to PATH）</td></tr>
+  </table>
+  <p>软件会在 PATH 上自动探测 Python 解释器与 JDK；缺环境时会在结果里给出明确提示（该装什么、勾哪个选项），不会直接报错退出。选 Python / Java 时不再要求填写编译器路径。</p>
+  <blockquote>造数据与随机数据页的「答案程序 / AC 代码」也会按当前语言编译运行，所以用 Python 写的 AC 代码同样能直接产出标准答案 <code>.out</code>。</blockquote>
+
+  <h3>界面切成 English</h3>
+  <p>底栏最右侧有「<strong>界面: 中文 / English</strong>」下拉，一键把标签页、按钮、表头、分区标题、底栏与状态提示整体切成英文，切回中文完全还原。评测日志与错误提示仍用中文，方便对照 OJ 报错习惯。</p>
+
+  <h3>网页版对拍实验室也支持多语言</h3>
+  <p>官网页面的<a href="lab.html">对拍实验室</a>同样可以换语言写：工作台上方有一排语言按钮，<strong>JavaScript / C++ / Python / Java</strong> 任选其一，切换后代码框里的示例会同步换成该语言的版本。</p>
+  <table>
+    <tr><th style="width:110px">语言</th><th>在哪跑</th><th>代码约定</th></tr>
+    <tr><td><b>JavaScript</b></td><td>浏览器内（Web Worker，带超时保护）</td><td>写一个函数 <code>main(input)</code>，收到本轮完整输入字符串，<code>return</code> 输出字符串</td></tr>
+    <tr><td><b>C++</b></td><td>服务端真编译器（g++）</td><td>完整程序，从 stdin 读、往 stdout 写</td></tr>
+    <tr><td><b>Python</b></td><td>服务端真解释器</td><td>完整程序，用 <code>sys.stdin</code> 读、<code>print</code> 输出</td></tr>
+    <tr><td><b>Java</b></td><td>服务端真编译器（JDK）</td><td>完整程序，<code>public class Main</code>，从 <code>System.in</code> 读、<code>System.out</code> 输出</td></tr>
+  </table>
+  <p>随机数据的生成<strong>始终在浏览器里做</strong>（输入格式 + 范围），所以换语言不影响数据，只影响两个程序怎么写怎么跑——这与桌面版的行为一致。页面加载时会探测服务端有哪些工具链，缺失的语言按钮会灰掉并给出提示，不会点进去才报错。</p>
+  <blockquote>服务端执行有硬性防护：源码 ≤ 64KB、输出 ≤ 256KB、编译 ≤ 25 秒、单轮运行 ≤ 5 秒，另有 CPU / 内存 / 进程数限制与频率限制，确保公网环境下可控。</blockquote>
+
+  <h2 id="data">四、评测约定与数据放置</h2>
+  <p>数据目录下放 <code>*.in</code>（输入）与同名 <code>.out</code>（优先）/ <code>.ans</code>（期望输出）。源码名为 <code>calendar.cpp</code> 时，对应数据组为 <code>calendar1.in</code> / <code>calendar1.out</code> 等。</p>
+  <p>单题 / 多题评测同时支持两种写法：</p>
+  <ol>
+    <li><strong>freopen 写法</strong>：程序用 <code>freopen("&lt;题名&gt;.in","r",stdin)</code> 读入、<code>freopen("&lt;题名&gt;.out","w",stdout)</code> 写出，评测时软件把每组 <code>.in</code> 复制为 <code>&lt;题名&gt;.in</code>，跑完读取写出的 <code>&lt;题名&gt;.out</code> 与期望比对。</li>
+    <li><strong>标准输入输出写法</strong>：程序从 stdin 读、往 stdout 写，评测时软件把该组 <code>.in</code> 经 stdin 喂给程序，再捕获标准输出与期望比对，兼容洛谷 / tarjano 等 OJ 的常规写法。</li>
+  </ol>
+  <blockquote>两种写法同时存在时，优先采用程序写出的 <code>&lt;题名&gt;.out</code>。评测临时文件只产生在数据目录内，每次评测结束自动清理，不影响原始数据。</blockquote>
+  <p><strong>输出归一化</strong>：比对前会自动忽略每行行尾空白与末尾空行（OI 常规做法）。期望答案里多一个空格、行尾多个回车，都不会误判 WA；但行中间的空格与空行仍参与比对。</p>
+
+  <h2 id="import">五、题目导入配置</h2>
+  <p>启动时自动读取 exe 同目录的 <code>题目导入.json</code>，预填「多题」列表（只读一次，改文件后重启软件生效）。格式：</p>
+<pre>{
+  "problems": [
+    { "name": "题目名", "src": "源码完整路径(.cpp)", "data": "数据目录路径" }
+  ]
+}</pre>
+
+  <h2 id="source">六、macOS / Linux 源码版</h2>
+  <p>软件用 Python 3 标准库 tkinter 编写，无第三方依赖；Windows 之外的平台直接运行源码即可，功能与 Windows 版完全一致。<strong>注意：tkinter 并非每个 Python 发行版都附带</strong>（部分精简版 / 自编译 Python 没有，且无法用 pip 安装），运行 <code>python3 ojjudge.py</code> 若报 <code>No module named 'tkinter'</code>，请按下文换一个自带 tkinter 的 Python；Windows 用户也可以直接用 exe，无需 Python 环境。</p>
+  <h3>环境准备</h3>
+  <ul>
+    <li><strong>Windows</strong>：需本机装有 g++。推荐下载 <a href="https://www.winlibs.com/" target="_blank" rel="noopener">MinGW-w64（WinLibs 版，解压即用）</a>，把压缩包解压到 <code>C:\mingw64</code>，使 <code>C:\mingw64\bin\g++.exe</code> 可用，无需安装器。</li>
+    <li><strong>macOS</strong>：Python 3 用 <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org 官方版</a>（自带 tkinter；macOS 系统自带的那份可能不带 tkinter，Homebrew 的 python 需先执行 <code>brew install python-tk</code>）；编译器安装 Xcode 命令行工具 <code>xcode-select --install</code>，得到 <code>clang++</code>。</li>
+    <li><strong>Linux</strong>（Debian/Ubuntu）：<code>sudo apt install python3 python3-tk g++</code>。其他发行版安装对应的 python3、tkinter 绑定与 g++。</li>
+  </ul>
+  <h3>运行</h3>
+  <ol>
+    <li>下载并解压源码包，进入目录执行 <code>python3 ojjudge.py</code>。</li>
+    <li><strong>务必</strong>在界面「编译器」一栏把默认的 Windows 路径改成本机编译器：macOS 填 <code>clang++</code>，Linux 填 <code>g++</code>。</li>
+    <li>「标准 / 优化」保持默认（C++14 / -O2），clang++ 与 g++ 均支持。</li>
+  </ol>
+  <h3>注意事项</h3>
+  <ul>
+    <li>评测记录保存在脚本同目录的 <code>评测记录.json</code>；<code>题目导入.json</code> 放在同目录即可启动自动导入（路径写本机路径）；编译器、标准、优化、分值、超时、对拍轮数等设置保存在同目录 <code>ojjudge_settings.json</code>，重启自动读回。</li>
+    <li>编译器诊断输出已按平台处理编码（Windows 用 ANSI，macOS / Linux 用 UTF-8），正常不再乱码。</li>
+  </ul>
+  <blockquote>源码包内含 <code>ojjudge.py</code> 与 <code>使用说明-源码版.md</code>，SHA256 <code>e02cf0db…9bef</code>。</blockquote>
+
+  <h2 id="faq">七、常见问题</h2>
+  <table>
+    <tr><th style="width:220px">问题</th><th>处理</th></tr>
+    <tr><td>显示「无输出」</td><td>确认程序有输出：freopen 写法检查文件名是 <code>&lt;题名&gt;.out</code>；标准输入输出写法会被自动捕获。</td></tr>
+    <tr><td>显示「CE」</td><td>编译失败，看结果里的 g++ 报错信息，按提示修改源码。</td></tr>
+    <tr><td>找不到编译器</td><td>在界面「编译器」一栏填入本机 g++ 完整路径（如 <code>C:\mingw64\bin\g++.exe</code>）。</td></tr>
+    <tr><td>多题只测了一个</td><td>旧版本问题，当前版本已改为线程安全队列模式，单题异常不中断后续；请下载最新版。</td></tr>
+    <tr><td>macOS / Linux 能用吗</td><td>可以，用源码版：需 Python 3 与 C++ 编译器，运行 <code>python3 ojjudge.py</code>，编译器路径改为 <code>clang++</code> / <code>g++</code>。详见<a href="#source">第五节</a>。</td></tr>
+    <tr><td>答案明明对却判 WA</td><td>先看是不是行尾空格 / 末尾空行差异——v1.6 起已自动忽略这类空白；若仍 WA，请比对结果表格里的「期望 / 实际」两栏定位真实差异。</td></tr>
+    <tr><td>对拍报告「运行异常」</td><td>主程序或暴力程序非零退出（段错误 / 断言失败等）。软件会给出退出码，并把该轮输入存到工作目录的「问题数据」文件夹，直接拿来复现调试。</td></tr>
+  </table>
+
+  <h2 id="files">八、文件说明</h2>
+  <table>
+    <tr><th style="width:200px">文件</th><th>说明</th></tr>
+    <tr><td><code>OJJudge评测.exe</code></td><td>Windows 主程序（单文件，直接运行）</td></tr>
+    <tr><td><code>OJJudge源码-macOS-Linux.zip</code></td><td>macOS / Linux 源码版（ojjudge.py + 使用说明，需 Python 3）</td></tr>
+    <tr><td><code>题目导入.json</code></td><td>多题自动导入配置（可选，放在 exe / 脚本同目录）</td></tr>
+    <tr><td><code>评测记录.json</code></td><td>评测记录持久化文件（运行时自动生成）</td></tr>
+  </table>
+
+</article>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="logo-mark">OJ</span> OJJudge 评测软件</div>
+        <p>本地 OI 评测工具：单题 / 多题一键出分，对拍找 bug，随机数据生成。所有评测在本机完成，数据不出电脑。</p>
+      </div>
+      <div>
+        <h4>站点导航</h4>
+        <a href="index.html">首页</a>
+        <a href="guide.html">使用说明</a>
+        <a href="lab.html">对拍实验室</a>
+        <a href="changelog.html">更新日志</a>
+      </div>
+      <div>
+        <h4>相关</h4>
+        <a href="guide.html#import">题目导入.json</a>
+        <a href="guide.html#faq">常见问题</a>
+        <a href="download/OJJudge评测.exe" download>下载最新版</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> CPP Studio zhangjh · OJJudge 评测软件 · 数据不出本机</span>
+      <span>需本机 g++ 支持 · 默认 C:\mingw64\bin\g++.exe</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/i18n-dict.js"></script>
+<script src="js/i18n-dict-extra.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

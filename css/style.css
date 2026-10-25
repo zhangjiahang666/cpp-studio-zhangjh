@@ -385,11 +385,11 @@ ul { margin: 0; padding: 0; list-style: none; }
   justify-content: center;
 }
 
-/* 签名图是白底墨水字：衬一张白色"签名卡"，深浅主题下都成立 */
+/* 签名图为黑底浅字：衬一张深色"签名卡"，与黑底图标风格统一 */
 .signature-card img {
   width: min(480px, 82vw);
   height: auto;
-  background: #ffffff;
+  background: #0a0e16;
   padding: 28px 36px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
@@ -728,7 +728,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
 }
 
-.work-entry-icon { flex-shrink: 0; }
+.work-entry-icon { flex-shrink: 0; object-fit: contain; }
 
 .work-entry-body {
   display: flex;
