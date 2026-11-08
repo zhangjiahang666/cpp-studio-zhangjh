@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>使用说明 · Course2000</title>
+<meta name="description" content="Course2000 下载解压、运行前提（WebView2 Runtime）、桌面 exe 开课，以及 macOS / Linux 用浏览器或 py 源码版开课的步骤与目录结构。">
+<meta name="author" content="CPP Studio zhangjh">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="index.html">
+      <span class="logo-mark">C2</span>
+      <span class="logo-name">Course2000<small>前端课程</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="site-nav">
+      <a href="index.html">首页</a>
+      <a href="guide.html">使用说明</a>
+      <a href="course.html">课程体系</a>
+      <a href="download.html">下载</a>
+      <a href="changelog.html">更新日志</a>
+      <a href="https://zhangjiahang666.github.io/cpp-studio-zhangjh/works.html" target="_blank" rel="noopener">个人作品</a>
+      <a href="news.html">最新消息</a>
+      <a class="btn btn-outline btn-sm" href="#" data-update-check>检查更新</a>
+      <a class="btn btn-primary btn-sm" href="download.html">下载 exe</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>使用说明</h1>
+    <p>下载、解压、跨平台开课——从第一个网页到毕业作品，全部在本地完成。</p>
+  </div>
+</section>
+
+<main class="container">
+  <div class="doc">
+    <div class="toc">
+      <b>本页目录</b>
+      <ol>
+        <li><a href="#install">下载与解压</a></li>
+        <li><a href="#prereq">运行前提：WebView2 Runtime</a></li>
+        <li><a href="#open">打开课程（Windows exe）</a></li>
+        <li><a href="#nonwin">macOS / Linux 开课</a></li>
+        <li><a href="#structure">目录结构</a></li>
+        <li><a href="#faq">常见问题</a></li>
+      </ol>
+    </div>
+
+    <h2 id="install">1 · 下载与解压</h2>
+    <p>从「下载」页获取 <code>Course2000-Windows.zip</code>（约 88.5 MB，含 4019 个文件）。右键 → 全部解压，得到三层结构：</p>
+    <ul>
+      <li><code>Course2000.exe</code> — 单文件桌面程序（816 KB，C# + WebView2）</li>
+      <li><code>course2000/</code> — 课程目录：<code>index.html</code> + 2007 课 <code>lesson-XXX.html</code> + <code>showcase.html</code></li>
+      <li><code>Course2000-PPTX课件-2007课/</code> — 2007 课 PPTX + 总目录 + 检索页</li>
+    </ul>
+    <p>务必保证 <code>Course2000.exe</code> 与 <code>course2000/</code> 文件夹在<strong>同一目录</strong>——程序按相对位置加载课程。课件 PPTX 文件夹可放任意位置，独立使用。</p>
+    <blockquote>⚠️ 打开 PPTX 总目录前，请先把整个 zip <b>完整解压</b>。直接在压缩包内双击 <code>Course2000-总目录.pptx</code>，其相对超链接指向的 2007 个单课文件不存在，会报「指定的文件不存在」。</blockquote>
+
+    <h2 id="prereq">2 · 运行前提：WebView2 Runtime</h2>
+    <p>Windows 10 / 11 普遍已随 Microsoft Edge 预装 WebView2 Runtime，双击 exe 即可。若提示「WebView2 内核初始化失败」：</p>
+    <ul>
+      <li>到微软官网搜索并下载 <strong>「WebView2 Evergreen Standalone Installer」</strong>，装一次即可（约几十 MB，常驻系统）。</li>
+      <li>无需其他依赖：程序不依赖 Electron / Node / Python / 浏览器安装。</li>
+      <li>详细异常会写入程序目录 <code>build/error.log</code>，便于排查。</li>
+    </ul>
+
+    <h2 id="open">3 · 打开课程（Windows exe）</h2>
+    <ul>
+      <li>双击 <code>Course2000.exe</code>，窗口立即弹出并显示加载动画，引擎后台初始化、课程就绪后无缝切换，<b>不等白屏</b>。</li>
+      <li>默认最大化启动（最小 900×600）；支持窗口内右键菜单与快捷键。</li>
+      <li>用户缓存目录固定到程序自身目录（<code>cache/</code>），二次启动复用缓存、明显提速。</li>
+      <li>想换位置：连文件夹一起移动即可，无注册表残留。</li>
+    </ul>
+    <blockquote>未购买代码签名证书，首次运行 Windows / Edge 可能提示「发布者未知」（SmartScreen）。点「更多信息」→「仍要运行」，或下载面板选「保留文件」即可，之后不再提示。</blockquote>
+
+    <h2 id="nonwin">4 · macOS / Linux 开课</h2>
+    <p>不装 exe 也能学，两条路任选：</p>
+    <ul>
+      <li><strong>浏览器直接开</strong>：解压后，用任意现代浏览器打开 <code>course2000/index.html</code>，功能与 exe 内完全一致（exe 只是提供原生窗口与启动优化）。</li>
+      <li><strong>py 生成器</strong>：下载 <code>gen_course.py</code>（18 KB，纯 Python 3 标准库、零依赖），在脚本目录执行 <code>python3 gen_course.py</code> 生成 <code>course.html</code> 课程页，浏览器打开即学。改文件顶部 <code>UNITS</code> 数据即可产出自己的课程。</li>
+    </ul>
+    <p>macOS / Linux 没有 WebView2，因此桌面 exe 不支持；上述两种方式在 Unix 系统下体验与 Windows 等效。</p>
+
+    <h2 id="structure">5 · 目录结构</h2>
+    <pre class="tree">Course2000/
+├─ Course2000.exe                 ← 单文件桌面程序（Windows）
+├─ course2000/                    ← 课程站（纯静态 HTML）
+│  ├─ index.html                  ← 课程目录页（检索 + 94 单元分区）
+│  ├─ lesson-001 … lesson-2007.html
+│  └─ showcase.html               ← 毕业作品：能力展示台
+├─ Course2000-PPTX课件-2007课/    ← 独立课件包（PowerPoint / WPS）
+│  ├─ lesson-001 … lesson-2007.pptx
+│  ├─ Course2000-总目录.pptx      ← 2007 条超链接，直达每一课
+│  └─ index.html                  ← 课件检索页
+└─ cache/                         ← exe 运行缓存（可删，首次加载略慢）</pre>
+
+    <h2 id="faq">6 · 常见问题</h2>
+    <div class="faq">
+      <details>
+        <summary>启动提示「WebView2 内核初始化失败」怎么办？</summary>
+        <div class="answer">说明系统缺少 Microsoft Edge WebView2 Runtime。到微软官网搜索「WebView2 Evergreen Standalone Installer」下载安装一次即可；详细异常写入程序目录 <code>build/error.log</code>。</div>
+      </details>
+      <details>
+        <summary>不装 exe，能直接看课程吗？</summary>
+        <div class="answer">可以。课程是纯静态 HTML，解压后用任意现代浏览器打开 <code>course2000/index.html</code> 即可，功能与 exe 内一致。</div>
+      </details>
+      <details>
+        <summary>macOS / Linux 怎么用？</summary>
+        <div class="answer">浏览器直接开 <code>course2000/index.html</code>，或下载 <code>gen_course.py</code> 在本机 <code>python3 gen_course.py</code> 生成课程页学习（Python 3.8+，无需第三方库）。</div>
+      </details>
+      <details>
+        <summary>换电脑 / 换文件夹，学习进度会丢吗？</summary>
+        <div class="answer">课程站本身不记录个人进度，把整个文件夹拷过去即可。exe 生成的 <code>cache/</code> 缓存目录删除不影响课程内容，只是首次加载略慢。</div>
+      </details>
+      <details>
+        <summary>PPTX 课件在哪里？</summary>
+        <div class="answer">PPTX 课件在 zip 内的 <code>Course2000-PPTX课件-2007课/</code>，先完整解压 zip 后使用。</div>
+      </details>
+      <details>
+        <summary>zip 校验值怎么用？</summary>
+        <div class="answer">Windows PowerShell 执行 <code>Get-FileHash Course2000-Windows.zip -Algorithm MD5</code>，与「下载」页值比对一致即说明文件完整未被篡改。</div>
+      </details>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="logo-mark">C2</span> Course2000 前端课程</div>
+        <p>前端三剑客（HTML / CSS / JavaScript）系统课：94 单元 302 课时、2007 课一课一页。Windows 单文件 exe 离线开课，配套 PPTX 课件。数据不出本机。</p>
+      </div>
+      <div>
+        <h4>站点导航</h4>
+        <a href="index.html">首页</a>
+        <a href="guide.html">使用说明</a>
+        <a href="course.html">课程体系</a>
+        <a href="download.html">下载</a>
+        <a href="changelog.html">更新日志</a>
+        <a href="https://zhangjiahang666.github.io/cpp-studio-zhangjh/works.html" target="_blank" rel="noopener">个人作品</a>
+        <a href="news.html">最新消息</a>
+      </div>
+      <div>
+        <h4>相关</h4>
+        <a href="source.html">py 源码</a>
+        <a href="download.html#hash">校验值</a>
+        <a href="https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/Course2000-Windows.zip" download>下载最新版</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> CPP Studio zhangjh · Course2000 · 数据不出本机</span>
+      <span>需本机 WebView2 Runtime · macOS / Linux 用 py 或浏览器</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/update.js"></script>
+</body>
+</html>

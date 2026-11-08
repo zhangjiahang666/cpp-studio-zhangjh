@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>py 源码 · gen_course.py · Course2000</title>
+<meta name="description" content="Course2000 课程页生成器 gen_course.py 完整源码：纯 Python 3 标准库、零依赖，改 UNITS 数据即可生成自己的前端课程页。macOS / Linux 可用。">
+<meta name="author" content="CPP Studio zhangjh">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="index.html">
+      <span class="logo-mark">C2</span>
+      <span class="logo-name">Course2000<small>前端课程</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="site-nav">
+      <a href="index.html">首页</a>
+      <a href="guide.html">使用说明</a>
+      <a href="course.html">课程体系</a>
+      <a href="download.html">下载</a>
+      <a href="changelog.html">更新日志</a>
+      <a href="https://zhangjiahang666.github.io/cpp-studio-zhangjh/works.html" target="_blank" rel="noopener">个人作品</a>
+      <a href="news.html">最新消息</a>
+      <a class="btn btn-outline btn-sm" href="#" data-update-check>检查更新</a>
+      <a class="btn btn-primary btn-sm" href="download.html">下载 exe</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>py 课程生成器</h1>
+    <p>Course2000 的课程页由纯 Python 3 标准库脚本生成：零第三方依赖，改 UNITS 数据即可产出自己的前端课程。</p>
+  </div>
+</section>
+
+<main class="container">
+
+  <section>
+    <div class="sec-head">
+      <div class="sec-kicker">PYTHON SOURCE</div>
+      <h2 class="sec-title">gen_course.py · 课程页生成器</h2>
+      <p class="sec-desc">Course2000 的课程页由这段 Python 脚本生成：纯标准库、零第三方依赖，Python 3.8+ 任何系统可跑。改数据即可产出自己的课程。</p>
+    </div>
+
+    <div class="grid cols-3">
+      <div class="card"><h3><span class="ic">🧱</span>数据驱动</h3><p>课程内容就是文件顶部的 <b>UNITS</b> 列表：单元名、主题色、课目、两条要点、技术标签。改列表 = 改课程。</p></div>
+      <div class="card"><h3><span class="ic">🎨</span>自带模板</h3><p>内置课程页骨架 + <b>8 个 CSS 效果</b>与 <b>8 段关键帧动画</b>分镜区，附可运行代码，生成即用。</p></div>
+      <div class="card"><h3><span class="ic">🖥️</span>跨平台</h3><p>输出单个 <code>course.html</code>，<b>Windows / macOS / Linux</b> 通用，浏览器直接打开，不依赖 exe。</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="sec-kicker">NON-WINDOWS</div>
+      <h2 class="sec-title">非 Windows 机型使用步骤</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div>
+          <h4>下载 <code>gen_course.py</code>（23 KB）</h4>
+          <p><a href="https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/gen_course.py" download>点此下载</a>，或直接复制本页下方全文保存为 <code>gen_course.py</code>。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h4>确认 Python 3</h4>
+          <p>终端执行 <code>python3 --version</code>；macOS / Linux 通常自带，无需安装任何第三方库。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h4>运行生成</h4>
+          <p>在脚本所在目录执行 <code>python3 gen_course.py</code>，得到 <code>course.html</code>，双击用浏览器打开即课程页。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h4>改成自己的课程</h4>
+          <p>编辑文件顶部 <code>UNITS</code>：每个单元是 <code>(单元名, 主题色, [(课目, 要点一, 要点二, 标签), ...])</code>，保存后重新运行即可。</p>
+        </div>
+      </div>
+    </div>
+    <div class="note ok" style="margin-top:22px">
+      <b>与 exe 的关系：</b>Windows 桌面版（Course2000.exe）加载的是同一套 HTML 课程站的扩展版（2007 课）；本生成器是其结构与生成方式的开放样本，用于二次定制与学习。
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="sec-kicker">FULL SOURCE · 386 行</div>
+      <h2 class="sec-title">完整源码</h2>
+      <p class="sec-desc">与 <a href="https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/gen_course.py" download>下载文件</a> 字节一致（MD5 <code>3a0b8362f38042051e8193829b636a88</code>）。</p>
+    </div>
+    <div class="code-toolbar">
+      <span class="fname">gen_course.py</span>
+      <span style="color:var(--muted);font-size:13px">Python 3 · 零依赖</span>
+      <span class="spacer"></span>
+      <button class="btn-copy" data-copy="#src-code">复制代码</button>
+      <a class="btn-copy" href="https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/gen_course.py" download style="text-decoration:none">⬇ 下载</a>
+    </div>
+    <div class="code-box">
+      <pre id="src-code" data-lang="python"># -*- coding: utf-8 -*-
+"""Generate a 100-lesson HTML/CSS/JavaScript course page for the Ardot canvas.
+
+Course2000 · 前端三剑客课程生成器
+开发者：CPP Studio zhangjh
+© 2026 CPP Studio zhangjh · Course2000
+"""
+
+HTML = "#F06529"
+CSS = "#4A7DFF"
+JS = "#F0DB4F"
+
+__version__ = "1.1.0"
+
+# 版本源：与桌面 exe、简介站共读同一份 version.json
+VERSION_URLS = [
+    "https://raw.githubusercontent.com/zhangjiahang666/cpp-studio-zhangjh/main/course2000/version.json",
+    "https://cpp-studio-zhangjh.pages.dev/course2000/version.json",
+]
+
+# (unit_name, unit_color, [ (title, point1, point2, tags) x lessons ])
+UNITS = [
+    ("第一单元 · HTML 基础", HTML, [
+        ("认识 HTML", "理解 HTML 是网页的骨架与标记语言", "掌握标签、属性、元素三要素", "HTML"),
+        ("第一个网页", "编写 DOCTYPE 与 html/head/body 结构", "区分 head（不可见）与 body（可见内容）", "HTML"),
+        ("标题与段落", "使用 h1–h6 建立内容层级", "用 p 标签书写正文段落", "HTML"),
+        ("文本格式化", "strong 加粗、em 斜体强调语义", "mark、small、del 等修饰标签", "HTML"),
+        ("换行与分隔", "br 实现单标签换行", "hr 插入主题分隔线", "HTML"),
+        ("超链接跳转", "a 标签与 href 属性", "target=_blank 新窗口打开", "HTML"),
+        ("页内锚点", "href=#id 定位到页面片段", "为长文添加目录导航", "HTML"),
+        ("插入图片", "img 的 src 与 alt 属性", "理解相对/绝对图片路径", "HTML"),
+        ("有序列表", "ol 与 li 表达顺序步骤", "定制 start 与 type 属性", "HTML"),
+        ("无序列表", "ul 与 li 表达并列项", "导航菜单的常用结构", "HTML"),
+        ("定义列表", "dl/dt/dd 描述术语与解释", "适合词汇表与参数说明", "HTML"),
+        ("表格基础", "table/tr/td/th 构建二维数据", "thead 与 tbody 语义分组", "HTML"),
+        ("表格合并", "colspan 跨列合并单元格", "rowspan 跨行合并单元格", "HTML"),
+        ("文本输入框", "input 的 type=text 用法", "placeholder 与 value 属性", "HTML"),
+        ("按钮与表单", "form 包裹输入并提交", "button 与 submit 类型区别", "HTML"),
+    ]),
+    ("第二单元 · CSS 基础", CSS, [
+        ("认识 CSS", "理解样式表如何美化网页", "三种引入：行内/内部/外部", "CSS"),
+        ("选择器入门", "标签、类、ID 选择器", "选择器的优先级规则", "CSS"),
+        ("颜色与背景", "color 与 background 上色", "十六进制、rgb、hsl 取值", "CSS"),
+        ("字体设置", "font-size 与 font-family", "font-weight 控制字重", "CSS"),
+        ("文本排版", "text-align 与 line-height", "letter-spacing 字间距", "CSS"),
+        ("盒模型", "理解 content/margin/border/padding", "box-sizing 切换计算模式", "CSS"),
+        ("边框样式", "border-style/width/color", "border-radius 圆角", "CSS"),
+        ("尺寸控制", "width 与 height 设定大小", "max/min 限制范围", "CSS"),
+        ("显示模式", "block 与 inline 的差异", "inline-block 折中方案", "CSS"),
+        ("内外边距", "margin 外间距布局", "padding 内留白呼吸感", "CSS"),
+        ("阴影与圆角", "box-shadow 投影层次", "多重阴影叠加", "CSS"),
+        ("渐变背景", "linear-gradient 线性渐变", "radial-gradient 径向渐变", "CSS"),
+        ("溢出处理", "overflow 控制内容裁剪", "滚动条与隐藏策略", "CSS"),
+        ("透明度", "opacity 调整整体透明", "rgba 背景半透明", "CSS"),
+        ("尺寸单位", "px 固定与 % 相对", "em/rem 相对字体", "CSS"),
+        ("行内样式", "style 属性快速覆盖", "优先级最高但难维护", "CSS"),
+    ]),
+    ("第三单元 · CSS 进阶布局", CSS, [
+        ("Flex 入门", "display:flex 开启弹性盒", "理解主轴与交叉轴", "CSS"),
+        ("主轴对齐", "justify-content 水平分布", "space-between 两端对齐", "CSS"),
+        ("交叉轴对齐", "align-items 垂直居中", "center 实现经典居中", "CSS"),
+        ("Flex 换行", "flex-wrap 允许折行", "多卡片自适应排列", "CSS"),
+        ("子项伸缩", "flex-grow/shrink 分配空间", "flex:1 占满剩余", "CSS"),
+        ("Grid 入门", "display:grid 二维网格", "行列同时控制布局", "CSS"),
+        ("网格模板", "grid-template-columns 定义列", "repeat() 简化重复", "CSS"),
+        ("网格间距", "gap 统一行列间距", "取代 margin 塌陷问题", "CSS"),
+        ("定位基础", "position static/relative", "relative 偏移不脱标", "CSS"),
+        ("绝对定位", "absolute 相对最近定位父级", "实现精准叠放", "CSS"),
+        ("固定定位", "fixed 相对视口固定", "返回顶部按钮实战", "CSS"),
+        ("层叠顺序", "z-index 控制前后层级", "叠加浮层与遮罩", "CSS"),
+        ("过渡效果", "transition 平滑属性变化", "hover 动态反馈", "CSS"),
+        ("变换位移缩放", "transform translate/scale", "性能优于改布局", "CSS"),
+        ("旋转与倾斜", "rotate 旋转、skew 倾斜", "组合变换做特效", "CSS"),
+        ("伪类伪元素", ":hover/:nth-child 状态", "::before/::after 插入内容", "CSS"),
+    ]),
+    ("第四单元 · JavaScript 基础", JS, [
+        ("认识 JavaScript", "理解网页的行为与交互", "浏览器与 Node 双环境", "JS"),
+        ("引入脚本", "script 标签放置位置", "defer 与 async 区别", "JS"),
+        ("变量声明", "let/const 取代 var", "块级作用域概念", "JS"),
+        ("数据类型", "string/number 基础类型", "typeof 检测类型", "JS"),
+        ("布尔与空值", "true/false 逻辑值", "null 与 undefined 差异", "JS"),
+        ("运算符", "算术与比较运算符", "=== 严格相等", "JS"),
+        ("字符串操作", "拼接与 length 属性", "模板字符串反引号", "JS"),
+        ("条件判断", "if / else 分支逻辑", "三元运算符简写", "JS"),
+        ("多分支", "switch 处理多状态", "break 防止穿透", "JS"),
+        ("for 循环", "遍历固定次数", "累加与索引控制", "JS"),
+        ("while 循环", "条件满足持续执行", "避免死循环", "JS"),
+        ("数组基础", "方括号创建数组", "索引从 0 开始", "JS"),
+        ("数组方法", "push/map/filter 处理", "链式调用数据流", "JS"),
+        ("对象基础", "键值对组织数据", "对象描述真实事物", "JS"),
+        ("访问对象", "点语法与方括号", "动态键名取值", "JS"),
+        ("函数定义", "function 封装逻辑", "避免重复代码", "JS"),
+        ("函数参数", "形参与实参传递", "默认参数值", "JS"),
+        ("返回值", "return 输出结果", "无 return 返回 undefined", "JS"),
+        ("箭头函数", "=&gt; 简洁写法", "this 词法绑定", "JS"),
+        ("作用域", "全局与局部变量", "作用域链查找", "JS"),
+    ]),
+    ("第五单元 · JavaScript 进阶", JS, [
+        ("定时器", "setTimeout/setInterval", "clearTimeout 清除", "JS"),
+        ("严格模式", '"use strict" 约束', "捕捉隐式错误", "JS"),
+        ("解构赋值", "数组与对象拆解", "快速提取字段", "JS"),
+        ("展开运算", "spread ... 合并", "复制数组与对象", "JS"),
+        ("异步回调", "callback 处理延迟", "回调嵌套问题", "JS"),
+        ("Promise", "then/catch 链式", "统一异步错误处理", "JS"),
+        ("async/await", "异步代码同步写", "try/catch 捕获", "JS"),
+        ("错误处理", "try/catch/finally", "优雅降级体验", "JS"),
+        ("JSON 数据", "JSON.parse/stringify", "前后端数据交换", "JS"),
+        ("this 指向", "调用方式决定 this", "bind 固定上下文", "JS"),
+        ("类与继承", "class 面向对象", "extends 继承复用", "JS"),
+        ("模块化", "import/export 拆分", "提升可维护性", "JS"),
+        ("事件循环", "宏任务与微任务", "理解异步执行顺序", "JS"),
+    ]),
+    ("第六单元 · DOM 与事件", JS, [
+        ("认识 DOM", "文档对象模型树", "节点即网页元素", "JS"),
+        ("选择元素", "querySelector 精准选取", "getElementById 旧式", "JS"),
+        ("修改内容", "textContent 与 innerHTML", "innerHTML 注入风险", "JS"),
+        ("修改样式", "style 与 classList", "toggle 切换类名", "JS"),
+        ("创建节点", "createElement 动态生成", "appendChild 挂到树", "JS"),
+        ("事件监听", "addEventListener 绑定", "事件驱动交互", "JS"),
+        ("鼠标事件", "click/hover/mousemove", "实现悬停特效", "JS"),
+        ("键盘事件", "keydown/keyup 捕获", "快捷键与输入控制", "JS"),
+        ("表单事件", "submit/input/change", "实时校验输入", "JS"),
+        ("事件对象", "event 携带详情", "preventDefault 阻止默认", "JS"),
+    ]),
+    ("第七单元 · 综合实战", CSS, [
+        ("响应式初探", "viewport 与媒体查询", "移动优先设计", "CSS"),
+        ("导航栏实战", "flex 布局 + 交互", " sticky 固定顶栏", "HTML/CSS/JS"),
+        ("卡片列表", "grid 网格 + JS 渲染", "数据驱动批量生成", "HTML/CSS/JS"),
+        ("轮播图", "定时切换 + 过渡", "索引与自动播放", "HTML/CSS/JS"),
+        ("表单验证", "正则校验邮箱手机", "错误提示与禁用提交", "HTML/JS"),
+        ("项目部署", "构建与上线基础", "本地服务预览", "HTML/CSS/JS"),
+    ]),
+    ("第八单元 · 效果与动效", CSS, [
+        ("效果展示区", "汇集炫酷 CSS 特效", "玻璃拟态/霓虹/渐变", "CSS"),
+        ("动效分镜区", "@keyframes 关键帧动画", "loading/弹跳/渐显", "CSS/JS"),
+    ]),
+]
+
+# 效果展示区：8 个 CSS 特效（含可运行代码）
+EFFECTS = [
+    ("玻璃拟态 Glassmorphism",
+     ".glass{background:rgba(255,255,255,.1);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.25);border-radius:16px;}",
+     "半透明 + 背景模糊，做出磨砂玻璃质感。"),
+    ("霓虹发光 Neon Glow",
+     ".neon{color:#fff;text-shadow:0 0 6px #4A7DFF,0 0 16px #4A7DFF,0 0 32px #4A7DFF;}",
+     "多层 text-shadow 叠加，模拟霓虹灯辉光。"),
+    ("渐变文字 Gradient Text",
+     ".grad{background:linear-gradient(90deg,#F06529,#F0DB4F);-webkit-background-clip:text;color:transparent;}",
+     "背景裁切到文字，呈现流动渐变字。"),
+    ("悬浮卡片 Hover Lift",
+     ".card{transition:transform .25s,box-shadow .25s;}.card:hover{transform:translateY(-8px);box-shadow:0 16px 32px rgba(0,0,0,.45);}",
+     "上移 + 加深阴影，点击前的呼吸反馈。"),
+    ("脉冲边框 Pulse Border",
+     ".pulse{animation:pulse 1.6s infinite;}.pulse{border:2px solid #4A7DFF;}",
+     "配合关键帧让边框明暗呼吸，引导注意。"),
+    ("阴影渐变 Soft Shadow",
+     ".soft{box-shadow:0 10px 30px -10px rgba(74,125,255,.5);}",
+     "单色扩散阴影，营造轻盈悬浮感。"),
+    ("斜切标签 Skew Tag",
+     ".tag{transform:skewX(-12deg);background:#F06529;padding:6px 18px;}",
+     "轻微倾斜制造动感标签，常用于促销徽标。"),
+    ("网格背景 Grid BG",
+     ".gridbg{background-image:linear-gradient(#232B3D 1px,transparent 1px),linear-gradient(90deg,#232B3D 1px,transparent 1px);background-size:40px 40px;}",
+     "双线性渐变拼出科技感网格底纹。"),
+]
+
+# 动效分镜区：8 个 @keyframes 动画（含代码 + 分镜说明）
+ANIMATIONS = [
+    ("弹跳加载 Bounce",
+     "@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-24px)}}",
+     "小球上下回弹，常用于加载指示。"),
+    ("旋转刷新 Spin",
+     "@keyframes spin{to{transform:rotate(360deg)}}",
+     "匀速旋转一圈，加载圈标准动效。"),
+    ("渐显出现 FadeIn",
+     "@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}",
+     "由透明上移滑入，页面入场常用。"),
+    ("心跳脉冲 Heartbeat",
+     "@keyframes beat{0%,100%{transform:scale(1)}30%{transform:scale(1.15)}60%{transform:scale(.95)}}",
+     "缩放起伏模拟心跳，强调关注点。"),
+    ("闪烁发光 Glow",
+     "@keyframes glow{0%,100%{text-shadow:0 0 6px #4A7DFF}50%{text-shadow:0 0 22px #4A7DFF,0 0 40px #4A7DFF}}",
+     "辉光强弱循环，霓虹标题动效。"),
+    ("摇晃提醒 Shake",
+     "@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}",
+     "左右抖动提示输入错误。"),
+    ("展开下拉 SlideDown",
+     "@keyframes slideDown{from{transform:scaleY(0);opacity:0}to{transform:scaleY(1);opacity:1}}",
+     "垂直展开菜单，注意 transform-origin 顶部。"),
+    ("流光扫过 Shine",
+     "@keyframes shine{0%{background-position:-200% 0}100%{background-position:200% 0}}",
+     "渐变背景位移，做出高光扫过质感。"),
+]
+
+
+def tag_spans(tags):
+    out = []
+    for t in tags.split("/"):
+        color = {"HTML": HTML, "CSS": CSS, "JS": JS}.get(t, "#98A2B8")
+        out.append(f'&lt;span class="tag" style="background:{color}1f;color:{color};border:1px solid {color}55"&gt;{t}&lt;/span&gt;')
+    return "".join(out)
+
+
+UPDATE_BUTTON = '&lt;button class="upd-entry" type="button"&gt;检查更新&lt;/button&gt;'
+
+# 检查更新：注入到生成页的样式与脚本。
+# 放在模块级普通字符串里，避免 f-string 模板的花括号转义麻烦；
+# __VERSION__ / __URL1__ / __URL2__ 在 render() 里替换。
+UPDATE_JS = """
+&lt;style&gt;
+.upd-entry{margin-top:22px;background:transparent;border:2px solid #4A7DFF;color:#4A7DFF;font-size:22px;padding:10px 28px;border-radius:999px;cursor:pointer;font-family:inherit;transition:all .18s}
+.upd-entry:hover{background:#4A7DFF;color:#0F1420}
+.upd-mask{position:fixed;inset:0;z-index:9999;background:rgba(5,8,14,.72);display:flex;align-items:center;justify-content:center;padding:24px}
+.upd-card{width:100%;max-width:17em;background:#151B29;border:1px solid #2A3346;border-radius:.8em;overflow:hidden;box-shadow:0 1.2em 3em rgba(0,0,0,.55)}
+.upd-head{display:flex;align-items:center;justify-content:space-between;padding:.45em .7em;background:#1B2436;color:#9DB2FF;font-size:.95em}
+.upd-x{border:0;background:transparent;color:#98A2B8;font-size:.8em;cursor:pointer;padding:.2em .35em;border-radius:.2em}
+.upd-x:hover{background:#2A3346;color:#D5DBE6}
+.upd-body{display:flex;gap:.5em;padding:.7em .65em .5em}
+.upd-ic{flex:none;width:1.35em;height:1.35em;border-radius:50%;background:#4A7DFF;color:#fff;display:flex;align-items:center;justify-content:center;font-size:.8em;font-weight:700;font-family:Georgia,serif}
+.upd-title{color:#4A7DFF;font-size:1.05em;font-weight:700;margin-bottom:.2em}
+.upd-line{color:#D5DBE6;font-size:.88em;line-height:1.7}
+.upd-foot{display:flex;flex-wrap:wrap;gap:.3em;padding:.2em .65em .7em}
+.upd-btn{display:inline-flex;align-items:center;justify-content:center;padding:.32em .65em;border-radius:.3em;border:1px solid #2A3346;background:transparent;color:#D5DBE6;font-size:.85em;cursor:pointer;text-decoration:none;font-family:inherit}
+.upd-btn:hover{background:#1B2436;text-decoration:none}
+.upd-btn.primary{background:#4A7DFF;border-color:#4A7DFF;color:#fff}
+.upd-btn.primary:hover{background:#3A6BEA}
+&lt;/style&gt;
+&lt;script&gt;
+(function(){
+  var CUR="__VERSION__";
+  var URLS=["__URL1__","__URL2__"];
+  function parse(v){var m=String(v||"").trim().replace(/^v/i,"").match(/(\\d+)(?:\\.(\\d+))?(?:\\.(\\d+))?/);return m?[+m[1],+(m[2]||0),+(m[3]||0)]:null;}
+  function newer(a,b){var x=parse(a),y=parse(b);if(!x||!y)return false;for(var i=0;i&lt;3;i++){if(x[i]&gt;y[i])return true;if(x[i]&lt;y[i])return false;}return false;}
+  function get(u,ms){var c=window.AbortController?new AbortController():null,t=null,o={cache:"no-store"};if(c){o.signal=c.signal;t=setTimeout(function(){c.abort();},ms);}return fetch(u,o).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(j){clearTimeout(t);return j;},function(e){clearTimeout(t);throw e;});}
+  function load(ms){var i=0;function nx(){if(i&gt;=URLS.length)return Promise.reject(0);var u=URLS[i++];return get(u,ms).catch(nx);}return nx();}
+  function esc(s){return String(s==null?"":s).replace(/&amp;/g,"&amp;amp;").replace(/&lt;/g,"&amp;lt;").replace(/&gt;/g,"&amp;gt;").replace(/"/g,"&amp;quot;");}
+  function toast(m){var d=document.createElement("div");d.textContent=m;d.style.cssText="position:fixed;left:50%;bottom:2em;transform:translateX(-50%);z-index:10000;background:#1B2436;color:#F4F6FA;padding:.45em .9em;border-radius:.4em;font-size:.85em;border:1px solid #2A3346";document.body.appendChild(d);setTimeout(function(){if(d.parentNode)d.parentNode.removeChild(d);},2600);}
+  function show(j){
+    var dl=(j.downloads&amp;&amp;j.downloads.length)?j.downloads:[{label:"进入官网",url:j.homepage}];
+    var btns=dl.map(function(d){return '&lt;a class="upd-btn primary" href="'+esc(d.url)+'"&gt;'+esc(d.label||"进入官网")+'&lt;/a&gt;';}).join("");
+    var mask=document.createElement("div");mask.className="upd-mask";
+    mask.innerHTML='&lt;div class="upd-card"&gt;&lt;div class="upd-head"&gt;&lt;span&gt;发现新版本&lt;/span&gt;&lt;button class="upd-x" type="button"&gt;✕&lt;/button&gt;&lt;/div&gt;'+
+      '&lt;div class="upd-body"&gt;&lt;div class="upd-ic"&gt;i&lt;/div&gt;&lt;div&gt;&lt;div class="upd-title"&gt;Course2000 v'+esc(j.version)+' 已发布！&lt;/div&gt;'+
+      '&lt;div class="upd-line"&gt;当前版本：v'+CUR+'&lt;/div&gt;'+(j.notes?'&lt;div class="upd-line"&gt;更新内容：'+esc(j.notes)+'&lt;/div&gt;':'')+
+      '&lt;div class="upd-line"&gt;点击下方按钮前往官网获取更新：&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;'+
+      '&lt;div class="upd-foot"&gt;'+btns+'&lt;button class="upd-btn" type="button" data-d&gt;稍后再说&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;';
+    document.body.appendChild(mask);
+    function close(){if(mask.parentNode)mask.parentNode.removeChild(mask);}
+    mask.querySelector(".upd-x").onclick=close;
+    mask.querySelector("[data-d]").onclick=close;
+    mask.onclick=function(e){if(e.target===mask)close();};
+  }
+  function check(manual){
+    load(5000).then(function(j){
+      if(newer(j.version,CUR))show(j);
+      else if(manual)toast("当前已是最新版本 v"+CUR);
+    }).catch(function(){if(manual)toast("检查失败：无法连接网络");});
+  }
+  document.addEventListener("DOMContentLoaded",function(){
+    var b=document.querySelector(".upd-entry");if(b)b.onclick=function(){check(true);};
+    setTimeout(function(){check(false);},3000);
+  });
+})();
+&lt;/script&gt;
+"""
+
+
+def render():
+    lessons = []
+    n = 0
+    for unit_name, unit_color, items in UNITS:
+        cards = []
+        for title, p1, p2, tags in items:
+            n += 1
+            cards.append(f"""
+      &lt;div class="lesson"&gt;
+        &lt;div class="lnum" style="color:{unit_color}"&gt;{n:03d}&lt;/div&gt;
+        &lt;div class="lbody"&gt;
+          &lt;div class="ltitle"&gt;{title}&lt;/div&gt;
+          &lt;ul class="lpoints"&gt;
+            &lt;li&gt;{p1}&lt;/li&gt;
+            &lt;li&gt;{p2}&lt;/li&gt;
+          &lt;/ul&gt;
+          &lt;div class="ltags"&gt;{tag_spans(tags)}&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;""")
+        lessons.append(f"""
+    &lt;section class="unit"&gt;
+      &lt;div class="uhead" style="border-left:8px solid {unit_color}"&gt;
+        &lt;span class="udot" style="background:{unit_color}"&gt;&lt;/span&gt;{unit_name}
+      &lt;/div&gt;
+      &lt;div class="lgrid"&gt;{''.join(cards)}&lt;/div&gt;
+    &lt;/section&gt;""")
+
+    effects = "".join(f"""
+      &lt;div class="fxcard"&gt;
+        &lt;div class="fxtitle"&gt;{name}&lt;/div&gt;
+        &lt;pre class="code"&gt;{code}&lt;/pre&gt;
+        &lt;div class="fxdesc"&gt;{desc}&lt;/div&gt;
+      &lt;/div&gt;""" for name, code, desc in EFFECTS)
+
+    anims = "".join(f"""
+      &lt;div class="fxcard"&gt;
+        &lt;div class="fxtitle"&gt;{name}&lt;/div&gt;
+        &lt;pre class="code"&gt;{code}&lt;/pre&gt;
+        &lt;div class="fxdesc"&gt;{desc}&lt;/div&gt;
+      &lt;/div&gt;""" for name, code, desc in ANIMATIONS)
+
+    update_js = (UPDATE_JS
+                 .replace("__VERSION__", __version__)
+                 .replace("__URL1__", VERSION_URLS[0])
+                 .replace("__URL2__", VERSION_URLS[1]))
+    update_button = UPDATE_BUTTON
+
+    return f"""&lt;!doctype html&gt;
+&lt;html lang="zh-CN"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width,initial-scale=1"&gt;
+&lt;title&gt;前端三剑客 · 100 课系统课程&lt;/title&gt;
+&lt;style&gt;
+  *{{box-sizing:border-box;margin:0;padding:0}}
+  body{{background:#0F1420;color:#F4F6FA;font-family:"Noto Sans SC","Source Han Sans CN",sans-serif;font-size:28px;line-height:1.6;padding:64px 48px}}
+  .wrap{{max-width:1500px;margin:0 auto}}
+  .hero{{text-align:center;padding:40px 0 64px}}
+  .eyebrow{{font-size:30px;letter-spacing:8px;color:#98A2B8}}
+  .htitle{{font-size:96px;font-weight:800;margin:18px 0;background:linear-gradient(90deg,#F06529,#4A7DFF,#F0DB4F);-webkit-background-clip:text;color:transparent}}
+  .hsub{{font-size:34px;color:#D5DBE6}}
+  .legend{{display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap}}
+  .legend span{{font-size:28px;padding:8px 22px;border-radius:999px}}
+  .unit{{margin:56px 0}}
+  .uhead{{font-size:46px;font-weight:700;padding:14px 0 14px 22px;margin-bottom:30px;background:#151B29;border-radius:0 14px 14px 0}}
+  .udot{{display:inline-block;width:18px;height:18px;border-radius:50%;margin-right:16px;vertical-align:middle}}
+  .lgrid{{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}}
+  .lesson{{display:flex;gap:22px;background:#151B29;border:1px solid #232B3D;border-radius:18px;padding:26px 28px}}
+  .lnum{{font-size:46px;font-weight:800;font-family:"JetBrains Mono",monospace;min-width:84px}}
+  .lbody{{flex:1}}
+  .ltitle{{font-size:36px;font-weight:700;margin-bottom:14px}}
+  .lpoints{{list-style:none;font-size:28px;color:#D5DBE6}}
+  .lpoints li{{padding:6px 0 6px 28px;position:relative}}
+  .lpoints li:before{{content:"▹";position:absolute;left:0;color:#4A7DFF}}
+  .ltags{{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap}}
+  .tag{{font-size:24px;padding:4px 16px;border-radius:999px}}
+  .zone{{margin:72px 0;background:#10151F;border:1px solid #232B3D;border-radius:22px;padding:44px}}
+  .zhead{{font-size:52px;font-weight:800;text-align:center;margin-bottom:14px;color:#F0DB4F}}
+  .zsub{{font-size:30px;text-align:center;color:#98A2B8;margin-bottom:34px}}
+  .fxgrid{{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}}
+  .fxcard{{background:#151B29;border:1px solid #232B3D;border-radius:16px;padding:24px}}
+  .fxtitle{{font-size:32px;font-weight:700;margin-bottom:14px;color:#4A7DFF}}
+  .code{{background:#0B0F18;border:1px solid #232B3D;border-radius:12px;padding:18px;font-size:24px;font-family:"JetBrains Mono",monospace;color:#9FE0A0;white-space:pre-wrap;word-break:break-all;line-height:1.5}}
+  .fxdesc{{font-size:26px;color:#D5DBE6;margin-top:14px}}
+  .foot{{text-align:center;color:#98A2B8;font-size:26px;margin-top:48px}}
+&lt;/style&gt;&lt;/head&gt;
+&lt;body&gt;&lt;div class="wrap"&gt;
+  &lt;div class="hero"&gt;
+    &lt;div class="eyebrow"&gt;FRONTEND · 100 LESSONS&lt;/div&gt;
+    &lt;div class="htitle"&gt;前端三剑客 · 100 课&lt;/div&gt;
+    &lt;div class="hsub"&gt;从零系统掌握 HTML · CSS · JavaScript&lt;/div&gt;
+    &lt;div class="legend"&gt;
+      &lt;span style="background:{HTML}22;color:{HTML}"&gt;HTML 结构&lt;/span&gt;
+      &lt;span style="background:{CSS}22;color:{CSS}"&gt;CSS 样式&lt;/span&gt;
+      &lt;span style="background:{JS}22;color:{JS}"&gt;JS 交互&lt;/span&gt;
+    &lt;/div&gt;
+    {update_button}
+  &lt;/div&gt;
+  {''.join(lessons)}
+  &lt;div class="zone"&gt;
+    &lt;div class="zhead"&gt;效果展示区&lt;/div&gt;
+    &lt;div class="zsub"&gt;8 个可复用的 CSS 视觉特效 · 附源码&lt;/div&gt;
+    &lt;div class="fxgrid"&gt;{effects}&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="zone"&gt;
+    &lt;div class="zhead"&gt;动效分镜区&lt;/div&gt;
+    &lt;div class="zsub"&gt;8 段 @keyframes 关键帧动画 · 附分镜说明&lt;/div&gt;
+    &lt;div class="fxgrid"&gt;{anims}&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="foot"&gt;课程共 100 课 · 覆盖 HTML/CSS/JS 三大体系 · 含效果展示与动效分镜&lt;/div&gt;
+&lt;/div&gt;
+  {update_js}
+&lt;/body&gt;&lt;/html&gt;"""
+
+
+if __name__ == "__main__":
+    html = render()
+    with open("course.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print("written course.html, bytes:", len(html.encode("utf-8")))
+</pre>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="logo-mark">C2</span> Course2000 前端课程</div>
+        <p>前端三剑客（HTML / CSS / JavaScript）系统课：94 单元 302 课时、2007 课一课一页。Windows 单文件 exe 离线开课，配套 PPTX 课件。数据不出本机。</p>
+      </div>
+      <div>
+        <h4>站点导航</h4>
+        <a href="index.html">首页</a>
+        <a href="guide.html">使用说明</a>
+        <a href="course.html">课程体系</a>
+        <a href="download.html">下载</a>
+        <a href="changelog.html">更新日志</a>
+      </div>
+      <div>
+        <h4>相关</h4>
+        <a href="source.html">py 源码</a>
+        <a href="download.html#hash">校验值</a>
+        <a href="https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/Course2000-Windows.zip" download>下载最新版</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> CPP Studio zhangjh · Course2000 · 数据不出本机</span>
+      <span>需本机 WebView2 Runtime · macOS / Linux 用 py 或浏览器</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/update.js"></script>
+</body>
+</html>

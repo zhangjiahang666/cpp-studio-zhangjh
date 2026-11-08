@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>更新日志 · Course2000</title>
+<meta name="description" content="Course2000 更新日志：v1.0 简介站与桌面 exe 发布、2007 课课程站、PPTX 课件与 py 生成器。">
+<meta name="author" content="CPP Studio zhangjh">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="index.html">
+      <span class="logo-mark">C2</span>
+      <span class="logo-name">Course2000<small>前端课程</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="site-nav">
+      <a href="index.html">首页</a>
+      <a href="guide.html">使用说明</a>
+      <a href="course.html">课程体系</a>
+      <a href="download.html">下载</a>
+      <a href="changelog.html">更新日志</a>
+      <a href="https://zhangjiahang666.github.io/cpp-studio-zhangjh/works.html" target="_blank" rel="noopener">个人作品</a>
+      <a href="news.html">最新消息</a>
+      <a class="btn btn-outline btn-sm" href="#" data-update-check>检查更新</a>
+      <a class="btn btn-primary btn-sm" href="download.html">下载 exe</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>更新日志</h1>
+    <p>课程、课件与桌面程序的发布与进度记录。</p>
+  </div>
+</section>
+
+<main class="container">
+  <div class="timeline">
+
+    <div class="release">
+      <div class="v">
+        <b>v1.1.0</b>
+        <span>2026-11-08</span>
+        <span class="cur">当前版本</span>
+      </div>
+      <div>
+        <div class="rel-title">新增「检查更新」</div>
+        <ul>
+          <li><b>桌面 exe</b>：菜单「帮助 → 检查更新」手动触发，启动 3 秒后静默自动检查一次，有新版弹原生窗口提示。</li>
+          <li><b>站点与 py 生成页</b>：导航栏新增「检查更新」按钮，弹窗给出最新版号、更新说明与「进入官网」入口。</li>
+          <li><b>统一版本源</b>：版本信息集中放在 GitHub 仓库的 <code>course2000/version.json</code>，exe / 站点 / py 三端共读一份。</li>
+          <li><b>离线优先</b>：全程 5 秒超时，断网静默跳过，绝不阻塞启动。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="v">
+        <b>v1.0.0</b>
+        <span>2026-10-25</span>
+        <span>首发版</span>
+      </div>
+      <div>
+        <div class="rel-title">Course2000 首发</div>
+        <ul>
+          <li><b>简介站发布</b>：首页 / 使用说明 / 课程体系 / 下载 / 更新日志 / py 源码六页，模仿 OJJudge 站点设计。</li>
+          <li><b>桌面 exe v1.0</b>：C# + WebView2 单文件（816 KB），离线加载 2007 课课程站。</li>
+          <li><b>课程站</b>：94 单元、302 课时、2007 课一课一页，含检索与「能力展示台」毕业作品页。</li>
+          <li><b>PPTX 课件</b>：2007 课全部生成 16:9 课件，每页备注含讲稿；「总目录」一页直达每一课。</li>
+          <li><b>py 课程生成器</b>：<code>gen_course.py</code> 源码随站开放（纯 Python 3 标准库、零依赖）。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="v">
+        <b>路线图</b>
+        <span>规划中</span>
+        <span class="soon">待排期</span>
+      </div>
+      <div>
+        <div class="rel-title">后续计划</div>
+        <ul>
+          <li><b>单元扩展</b>：补充框架实战（React / Vue）、工程化与部署专题单元。</li>
+          <li><b>在线版</b>：课程站同步开放网页托管版，进度可云同步（需联网）。</li>
+          <li><b>多语言界面</b>：参照 OJJudge 的中英一键切换，课程站支持 English。</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="logo-mark">C2</span> Course2000 前端课程</div>
+        <p>前端三剑客（HTML / CSS / JavaScript）系统课：94 单元 302 课时、2007 课一课一页。Windows 单文件 exe 离线开课，配套 PPTX 课件。数据不出本机。</p>
+      </div>
+      <div>
+        <h4>站点导航</h4>
+        <a href="index.html">首页</a>
+        <a href="guide.html">使用说明</a>
+        <a href="course.html">课程体系</a>
+        <a href="download.html">下载</a>
+        <a href="changelog.html">更新日志</a>
+        <a href="https://zhangjiahang666.github.io/cpp-studio-zhangjh/works.html" target="_blank" rel="noopener">个人作品</a>
+        <a href="news.html">最新消息</a>
+      </div>
+      <div>
+        <h4>相关</h4>
+        <a href="source.html">py 源码</a>
+        <a href="download.html#hash">校验值</a>
+        <a href="https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/Course2000-Windows.zip" download>下载最新版</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> CPP Studio zhangjh · Course2000 · 数据不出本机</span>
+      <span>需本机 WebView2 Runtime · macOS / Linux 用 py 或浏览器</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/update.js"></script>
+</body>
+</html>
