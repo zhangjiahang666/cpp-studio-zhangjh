@@ -8,7 +8,7 @@
   var VERSION_URLS = [
     "https://raw.githubusercontent.com/zhangjiahang666/cpp-studio-zhangjh/main/course2000/version.json",
     "https://cdn.jsdelivr.net/gh/zhangjiahang666/cpp-studio-zhangjh@main/course2000/version.json",
-    "https://cpp-studio-zhangjh.pages.dev/course2000/version.json"
+    "https://zhangjiahang666.github.io/cpp-studio-zhangjh/course2000/version.json"
   ];
   var TIMEOUT_MS = 5000;
   var AUTO_DELAY_MS = 3000;
