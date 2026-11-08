@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>下载 · Course2000 Windows 桌面版</title>
-<meta name="description" content="下载 Course2000-Windows.zip（exe + 2007 课离线课程站 + PPTX 课件，88.5MB）与 py 课程生成器源码。含运行前提、SmartScreen 放行说明与校验值。">
+<meta name="description" content="下载 Course2000Setup.exe 一键安装器（选位置、自动下载、桌面快捷方式、附卸载程序），或 Course2000-Windows.zip 完整包与 py 课程生成器源码。含运行前提与校验值。">
 <meta name="author" content="CPP Studio zhangjh">
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="css/style.css">
@@ -37,16 +37,39 @@
 <section class="page-hero">
   <div class="container">
     <h1>下载 Course2000</h1>
-    <p>一个 zip 包含桌面程序、全部课程数据与 PPTX 课件；另附跨平台 py 课程生成器。解压即用。</p>
+    <p>推荐用 55 KB 一键安装器：选位置、自动下载完整包、建桌面快捷方式、附卸载程序。也可直接下载 zip 手动解压。</p>
   </div>
 </section>
 
 <main class="container">
   <div class="doc" id="hash">
     <h2>下载清单</h2>
+    <div class="card" style="border:2px solid #4A7DFF; margin-bottom:22px">
+      <h3>🚀 Course2000Setup.exe <span class="tag">推荐 · 一键安装</span></h3>
+      <div class="dl-meta">
+        <span>v1.1.0 · 55 KB</span>
+        <span>Windows 10 / 11</span>
+        <span>自动下载完整包 88.5 MB</span>
+        <span>开发者 · CPP Studio zhangjh</span>
+      </div>
+      <ul class="dl-list">
+        <li>自选安装位置（默认 <code>%LOCALAPPDATA%\Programs\Course2000</code>），可勾选桌面 / 开始菜单快捷方式</li>
+        <li>自动从 GitHub Release 下载完整包并做 SHA256 校验；把 zip 放在安装器同目录即可离线安装</li>
+        <li>解压 4019 个文件、写入 Windows「应用和功能」卸载登记、自动附带 <code>Course2000Uninstall.exe</code></li>
+        <li>装完可直接点「立即运行」；卸载从开始菜单或「设置 → 应用」进入，无需管理员权限</li>
+      </ul>
+      <a class="btn btn-primary" href="https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/Course2000Setup.exe" download>⬇ 下载安装器 <small>55 KB</small></a>
+      <a class="btn" href="https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/Course2000Uninstall.exe" download style="margin-left:8px">单独下载卸载器 <small>22 KB</small></a>
+      <div class="hash">
+        <div><b>安装器 MD5</b>　<span data-copy-text="1dac03e1b2d5bfdf5e26264344d1b8e8"><b>1dac03e1b2d5bfdf5e26264344d1b8e8</b></span></div>
+        <div><b>安装器 SHA256</b>　<span data-copy-text="9a1e7329d8f2c4a549d3f1efe61ac58579982ca6709b7a7e8b9f74c33c1d7a64">9a1e7329d8f2c4a54…</span>（点击可复制）</div>
+        <div><b>卸载器 MD5</b>　<span data-copy-text="0a6f7c4008ba4d2eaf44806f7c56e9fc"><b>0a6f7c4008ba4d2eaf44806f7c56e9fc</b></span>　·　<b>SHA256</b> <span data-copy-text="62ff0ebe96569c1878fa5007a3cf0065a137c4531efa969e2185bff7bfd9369a">62ff0ebe96569c18…</span></div>
+      </div>
+    </div>
+
     <div class="grid cols-2">
       <div class="card">
-        <h3>🖥️ Course2000-Windows.zip</h3>
+        <h3>🖥️ Course2000-Windows.zip <span class="tag">手动解压 · 高级用户</span></h3>
         <div class="dl-meta">
           <span>v1.1 · 2026-11</span>
           <span>88.5 MB</span>
@@ -89,27 +112,31 @@
     </div>
 
     <div class="note">
-      <b>SmartScreen 提示说明：</b>程序未购买代码签名证书，首次下载/运行时 Edge 或 Windows 可能提示「发布者未知」。选择「保留文件」；运行弹窗中点「更多信息」→「仍要运行」即可，之后不再提示。
+      <b>SmartScreen 提示说明：</b>安装器、软件本体与卸载器均未购买代码签名证书，首次下载/运行时 Edge 或 Windows 可能提示「发布者未知」。选择「保留文件」；运行弹窗中点「更多信息」→「仍要运行」即可，之后不再提示。
     </div>
 
     <h2>三步使用</h2>
     <div class="steps">
       <div class="step">
-        <h3>解压 zip</h3>
-        <p>右键 → 全部解压。保证 <code>Course2000.exe</code> 与 <code>course2000/</code> 文件夹在同一目录——程序按相对位置加载课程。</p>
+        <h3>下载安装器</h3>
+        <p>点上方的「下载安装器」（55 KB）。若出现 SmartScreen 提示，选「更多信息 → 仍要运行」；安装器与软件本体均为未签名的本地程序。</p>
       </div>
       <div class="step">
-        <h3>确认 WebView2 Runtime</h3>
-        <p>Windows 10/11 普遍已随 Edge 安装。若启动报「WebView2 内核初始化失败」，到微软官网下载「Evergreen Standalone Installer」装一次即可。</p>
+        <h3>选位置，自动安装</h3>
+        <p>安装器下载 88.5 MB 完整包并校验、解压 4019 个文件、创建桌面快捷方式，同时写入卸载登记并释放卸载程序。把 zip 放在安装器同目录即可离线安装。</p>
       </div>
       <div class="step">
-        <h3>双击 Course2000.exe 开课</h3>
-        <p>首次启动稍慢（初始化缓存），之后明显提速。想换位置，连文件夹一起移动即可，无注册表残留。</p>
+        <h3>桌面图标开课</h3>
+        <p>双击桌面「Course2000」即可。需系统已装 WebView2 Runtime（Win10 / 11 一般自带）；想手动解压 zip，直接下载下方完整包，把 exe 与 <code>course2000/</code> 放同一目录即可。</p>
       </div>
     </div>
 
     <h2>常见问题</h2>
     <div class="faq">
+      <details>
+        <summary>怎么卸载？安装器会留残留吗？</summary>
+        <div class="answer">开始菜单「Course2000 → 卸载 Course2000」，或 Windows「设置 → 应用 → Course2000 → 卸载」。卸载器会移除安装目录、桌面与开始菜单快捷方式、卸载登记项，并自动清理自身。安装器只在当前用户的 HKCU 写卸载登记，不需要管理员权限、不改系统目录。手动解压 zip 的用法没有注册表残留，直接删文件夹即可。</div>
+      </details>
       <details>
         <summary>启动提示「WebView2 内核初始化失败」怎么办？</summary>
         <div class="answer">说明系统缺少 Microsoft Edge WebView2 Runtime。到微软官网搜索「WebView2 Evergreen Standalone Installer」下载安装一次即可；Win11 与近期 Win10 通常已自带。详细异常会写入程序目录 <code>build/error.log</code>。</div>
@@ -159,7 +186,7 @@
         <h4>相关</h4>
         <a href="source.html">py 源码</a>
         <a href="download.html#hash">校验值</a>
-        <a href="https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/Course2000-Windows.zip" download>下载最新版</a>
+        <a href="https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/Course2000Setup.exe" download>下载最新版</a>
       </div>
     </div>
     <div class="footer-bottom">

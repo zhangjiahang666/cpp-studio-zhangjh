@@ -46,7 +46,7 @@
     <div class="toc">
       <b>本页目录</b>
       <ol>
-        <li><a href="#install">下载与解压</a></li>
+        <li><a href="#install">安装 / 下载与解压</a></li>
         <li><a href="#prereq">运行前提：WebView2 Runtime</a></li>
         <li><a href="#open">打开课程（Windows exe）</a></li>
         <li><a href="#nonwin">macOS / Linux 开课</a></li>
@@ -55,8 +55,9 @@
       </ol>
     </div>
 
-    <h2 id="install">1 · 下载与解压</h2>
-    <p>从「下载」页获取 <code>Course2000-Windows.zip</code>（约 88.5 MB，含 4019 个文件）。右键 → 全部解压，得到三层结构：</p>
+    <h2 id="install">1 · 安装 / 下载与解压</h2>
+    <p><b>推荐：</b>从「下载」页获取 <code>Course2000Setup.exe</code>（55 KB），运行后选安装位置，安装器自动下载完整包、校验、解压并创建桌面快捷方式与卸载入口，全程无需手动干预。装好后目录结构如下。</p>
+    <p><b>手动方式：</b>下载 <code>Course2000-Windows.zip</code>（约 88.5 MB，含 4019 个文件），右键 → 全部解压，得到三层结构：</p>
     <ul>
       <li><code>Course2000.exe</code> — 单文件桌面程序（816 KB，C# + WebView2）</li>
       <li><code>course2000/</code> — 课程目录：<code>index.html</code> + 2007 课 <code>lesson-XXX.html</code> + <code>showcase.html</code></li>
@@ -86,7 +87,7 @@
     <p>不装 exe 也能学，两条路任选：</p>
     <ul>
       <li><strong>浏览器直接开</strong>：解压后，用任意现代浏览器打开 <code>course2000/index.html</code>，功能与 exe 内完全一致（exe 只是提供原生窗口与启动优化）。</li>
-      <li><strong>py 生成器</strong>：下载 <code>gen_course.py</code>（18 KB，纯 Python 3 标准库、零依赖），在脚本目录执行 <code>python3 gen_course.py</code> 生成 <code>course.html</code> 课程页，浏览器打开即学。改文件顶部 <code>UNITS</code> 数据即可产出自己的课程。</li>
+      <li><strong>py 生成器</strong>：下载 <code>gen_course.py</code>（24 KB，纯 Python 3 标准库、零依赖），在脚本目录执行 <code>python3 gen_course.py</code> 生成 <code>course.html</code> 课程页，浏览器打开即学。改文件顶部 <code>UNITS</code> 数据即可产出自己的课程。</li>
     </ul>
     <p>macOS / Linux 没有 WebView2，因此桌面 exe 不支持；上述两种方式在 Unix 系统下体验与 Windows 等效。</p>
 
@@ -154,7 +155,7 @@
         <h4>相关</h4>
         <a href="source.html">py 源码</a>
         <a href="download.html#hash">校验值</a>
-        <a href="https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/Course2000-Windows.zip" download>下载最新版</a>
+        <a href="https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/Course2000Setup.exe" download>下载最新版</a>
       </div>
     </div>
     <div class="footer-bottom">

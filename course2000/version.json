@@ -9,5 +9,12 @@
       "label": "进入官网",
       "url": "https://cpp-studio-zhangjh.pages.dev/"
     }
-  ]
+  ],
+  "package": {
+    "url": "https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/Course2000-Windows.zip",
+    "sha256": "76dd24f81129cc362467028687e484643627aaa1547aa64ca579dfc5b1ab7283",
+    "size": 92807044,
+    "setup": "https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/Course2000Setup.exe",
+    "uninstall": "https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/Course2000Uninstall.exe"
+  }
 }
