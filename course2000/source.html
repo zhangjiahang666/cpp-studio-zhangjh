@@ -65,7 +65,7 @@
     <div class="steps">
       <div class="step">
         <div>
-          <h4>下载 <code>gen_course.py</code>（23 KB）</h4>
+          <h4>下载 <code>gen_course.py</code>（24 KB）</h4>
           <p><a href="https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/gen_course.py" download>点此下载</a>，或直接复制本页下方全文保存为 <code>gen_course.py</code>。</p>
         </div>
       </div>
@@ -95,9 +95,9 @@
 
   <section>
     <div class="sec-head">
-      <div class="sec-kicker">FULL SOURCE · 386 行</div>
+      <div class="sec-kicker">FULL SOURCE · 388 行</div>
       <h2 class="sec-title">完整源码</h2>
-      <p class="sec-desc">与 <a href="https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/gen_course.py" download>下载文件</a> 字节一致（MD5 <code>3a0b8362f38042051e8193829b636a88</code>）。</p>
+      <p class="sec-desc">与 <a href="https://github.com/zhangjiahang666/cpp-studio-zhangjh/releases/latest/download/gen_course.py" download>下载文件</a> 字节一致（MD5 <code>fa062000c1c90947423bf2b18faa66d9</code>）。</p>
     </div>
     <div class="code-toolbar">
       <span class="fname">gen_course.py</span>
@@ -124,6 +124,7 @@ __version__ = "1.1.0"
 # 版本源：与桌面 exe、简介站共读同一份 version.json
 VERSION_URLS = [
     "https://raw.githubusercontent.com/zhangjiahang666/cpp-studio-zhangjh/main/course2000/version.json",
+    "https://cdn.jsdelivr.net/gh/zhangjiahang666/cpp-studio-zhangjh@main/course2000/version.json",
     "https://cpp-studio-zhangjh.pages.dev/course2000/version.json",
 ]
 
@@ -314,7 +315,7 @@ UPDATE_BUTTON = '&lt;button class="upd-entry" type="button"&gt;检查更新&lt;/
 
 # 检查更新：注入到生成页的样式与脚本。
 # 放在模块级普通字符串里，避免 f-string 模板的花括号转义麻烦；
-# __VERSION__ / __URL1__ / __URL2__ 在 render() 里替换。
+# __VERSION__ / __URL1__ / __URL2__ / __URL3__ 在 render() 里替换。
 UPDATE_JS = """
 &lt;style&gt;
 .upd-entry{margin-top:22px;background:transparent;border:2px solid #4A7DFF;color:#4A7DFF;font-size:22px;padding:10px 28px;border-radius:999px;cursor:pointer;font-family:inherit;transition:all .18s}
@@ -337,7 +338,7 @@ UPDATE_JS = """
 &lt;script&gt;
 (function(){
   var CUR="__VERSION__";
-  var URLS=["__URL1__","__URL2__"];
+  var URLS=["__URL1__","__URL2__","__URL3__"];
   function parse(v){var m=String(v||"").trim().replace(/^v/i,"").match(/(\\d+)(?:\\.(\\d+))?(?:\\.(\\d+))?/);return m?[+m[1],+(m[2]||0),+(m[3]||0)]:null;}
   function newer(a,b){var x=parse(a),y=parse(b);if(!x||!y)return false;for(var i=0;i&lt;3;i++){if(x[i]&gt;y[i])return true;if(x[i]&lt;y[i])return false;}return false;}
   function get(u,ms){var c=window.AbortController?new AbortController():null,t=null,o={cache:"no-store"};if(c){o.signal=c.signal;t=setTimeout(function(){c.abort();},ms);}return fetch(u,o).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(j){clearTimeout(t);return j;},function(e){clearTimeout(t);throw e;});}
@@ -418,7 +419,8 @@ def render():
     update_js = (UPDATE_JS
                  .replace("__VERSION__", __version__)
                  .replace("__URL1__", VERSION_URLS[0])
-                 .replace("__URL2__", VERSION_URLS[1]))
+                 .replace("__URL2__", VERSION_URLS[1])
+                 .replace("__URL3__", VERSION_URLS[2]))
     update_button = UPDATE_BUTTON
 
     return f"""&lt;!doctype html&gt;
